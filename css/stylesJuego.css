@@ -1,0 +1,91 @@
+body
+{
+    height: 100vh;
+    width: 100%;
+    font-size: 0px;
+    display: flex;
+    align-items: top;
+    flex-direction: column;
+    padding-top: 1vh;
+    padding-left: 10%;
+    margin-top: 0px;
+}
+
+#principal
+{
+    display: flex;
+    align-items: top;
+}
+
+h1
+{
+    font-size: 2rem;
+}
+
+#pad-numerico{
+    height: 100%;
+    width: 30%;
+}
+
+#pad-numerico .row
+{
+    width: 97%;
+    height: 15vh;
+    padding: 1.5%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#pad-numerico .row div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 27.5%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    height: 100%;
+}
+
+#pad-numerico .row div button
+{
+    height: 100%;
+    width: 100%;
+    font-size: 5rem;
+    border-radius: 20px;
+}
+
+#display
+{
+    width: 98%;
+    height: 10vh;
+    margin-bottom: 5%;
+}
+
+#display input{
+    width: 100%;
+    height: 100%;
+    font-size: 4rem;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+#submit
+{
+    height: 15vh;
+    width: 100%;
+    font-size: 4rem;
+    border-radius: 10px;
+    margin-top: 5%
+}
+
+#historial
+{
+    margin-left: 10%;
+    width: 30%;
+}
+
+#historial p
+{
+    font-size: 1rem;
+}
