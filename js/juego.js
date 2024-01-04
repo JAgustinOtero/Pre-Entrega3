@@ -1,135 +1,55 @@
-//VARIABLES GLOBALES
-let partidas = [];
-let cant_intentos;
-let jugar_denuevo;
-let intento;
-let historial_intentos;
-let cant_numeros;
-let respuesta = [];
-let nro_partida = 0;
+const SUBMIT = 0;
 
-class Partida {
-  constructor(cant_numeros, intentos, nro_partida) {
-    this.cant_numeros = cant_numeros;
-    this.intentos = intentos;
-    this.nro_partida = nro_partida;
-  }
+/* NODOS */
+let header = document.getElementsByTagName("header");
+let boton_cant_numeros = header[0].getElementsByTagName("button");
+
+let main = document.getElementsByTagName("main");
+let intento = main[0].getElementsByClassName(
+  "pad-numerico-display-input-numero"
+);
+let boton_numeral = main[0].getElementsByClassName("pad-numerico-row-boton");
+let boton_submit = main[0].getElementsByClassName("pad-numerico-submit-boton");
+let historial = main[0].getElementsByClassName("historial");
+
+let p = document.createElement("p");
+historial[0].append(p);
+
+enfoqueDisplay();
+intento[0].value = "";
+
+/* VARIABLES */
+cant_numeros = 0;
+cant_intentos = 0;
+let respuesta = 0;
+
+/*MAIN */
+
+main[0].style.display = "none";
+
+/* LISTENERS */
+for (let i = 0; i < 9; i++) {
+  boton_numeral[i].addEventListener("click", () => {
+    setnumber(i + 1);
+  });
+  boton_cant_numeros[i].addEventListener("click", () => {
+    setCantNumber(i + 1);
+    respuesta = generarNumeroAleatorio(cant_numeros, false, false); //genero un numero random con la cantidad de numeros elegidos
+    console.log(respuesta);
+  });
+}
+intento[0].addEventListener("keypress", keypad);
+boton_submit[SUBMIT].addEventListener("click", esCorrecto);
+
+/*************************************************************************FUNCIONES*******************************************************************/
+
+function setnumber(numero) {
+  intento[0].value += `${numero}`;
+  enfoqueDisplay();
 }
 
-//MAIN
-do {
-  //reinicio variables
-  historial_intentos = [];
-  cant_intentos = 0;
-  cant_numeros = 0;
-
-  let menu = Number(
-    prompt(
-      "ingrese 1 si quiere jugar \nIngrese 2 si quiere ver su historial\ningrese 3 si quiere salir"
-    )
-  );
-
-  if (menu == 1) {
-    cant_numeros = 0;
-    while (cant_numeros < 1 || cant_numeros > 9)
-      //se elije la cantidad de numeros con la que se quiere jugar
-      cant_numeros = Math.floor(
-        prompt(
-          "elija la cantidad de numeros con los que quiere jugar, debe ser mayor a 0 y menor a 10 y debe ser un numero entero"
-        )
-      );
-    alert(`ha decidido jugar con ${cant_numeros} numeros`);
-
-    respuesta = generarNumeroAleatorio(cant_numeros, false, false); //se genera un numero aleatorio
-    alert(respuesta);
-
-    // se le pide al usuario que ingrese un numero de X digitos y se comprueba que sea valido
-    do {
-      intento = pedirNumero(false);
-      while (!esValido(intento)) {
-        pedirNumero(true);
-      }
-      historial_intentos[cant_intentos] = `${intento}: ${
-        verificacion(intento)[0]
-      } bien, ${verificacion(intento)[1]} fuera de lugar y ${
-        cant_numeros - verificacion(intento)[1] - verificacion(intento)[0]
-      } mal
-`; //se agrega un historial de numeros para facilitar la resolucion
-      cant_intentos++;
-    } while (!esCorrecto(intento)); //se comprueba que el numero sea correcto y se le da una respuesta adecuada
-
-    nro_partida++;
-    partidas.push(new Partida(cant_numeros, cant_intentos, nro_partida));
-
-    jugar_denuevo = confirm("Quiere volver a jugar?");
-  }
-  if (menu == 2) {
-    mostrarHistorial(partidas);
-    jugar_denuevo = 1;
-  }
-  if (menu == 3) {
-    break;
-  }
-} while (jugar_denuevo);
-
-//FUNCIONES
-/*
-function esCorrecto( numero )
-entrada: 
-        number: numero a comprobar
-return: boolean
-Esta funcion analiza si el resultado igresado es correcto e informa cuantos numeros estan en su lugar,
-cuantos son parte del numero pero no estan en su lugar y cuantos no son parte del numero.
-a su vez analiza el resultado devuelto por la funcion verificacion y le da una respuesta al usuario
-*/
-function esCorrecto(numero) {
-  let salida = false;
-  let comprobacion = verificacion(numero);
-
-  if (comprobacion[0] == 0 && comprobacion[1] == 0) {
-    alert("todos los numeros son incorrectos");
-  } else if (comprobacion[0] == cant_numeros) {
-    alert(
-      "FELICIDADES! Acertaste al numero!" +
-        "\nY solo te tomo " +
-        cant_intentos +
-        " intentos"
-    );
-    salida = true;
-  } else
-    alert(
-      "hay " +
-        comprobacion[0] +
-        " numeros correctos en su posicion y hay " +
-        comprobacion[1] +
-        " numeros correctos que no estan en su posicion"
-    );
-
-  return salida;
-}
-
-/*
-function verificacion( numero )
-entrada: 
-        array numerico: numero a desglosar
-return: array numerico
-Esta funcion analiza numero a numero si el numero ingresado es igual a la respuesta, y devuelve un valor asociado:
-el numero es parte de la respuesta y esta en el lugar correcto: salida[0]++
-el numero es parte de la respuesta pero no esta en el lugar indicado: salida[1]++
-el numero no forma parte de la respuesta: no cambia nada
-*/
-function verificacion(numero) {
-  let salida = [0, 0];
-  for (let j = 0; j < numero.length; j++) {
-    for (let i = 0; i < numero.length; i++) {
-      if (numero[i] == respuesta[j] && j == i) {
-        salida[0]++;
-      } else if (numero[i] == respuesta[j]) {
-        salida[1]++;
-      }
-    }
-  }
-  return salida;
+function keypad(e) {
+  if (e.key == "Enter") esCorrecto();
 }
 
 /*
@@ -153,6 +73,18 @@ function seRepite(numero) {
     if (numero[0] == numero[1]) salida = true;
   }
   return salida;
+}
+
+/*
+function rand(max, min)
+entrada: 
+        number: max: numero maximo que devolvera
+        number: min: numero minimo que devolvera
+return: number: numero aleatorio
+Esta funcion retorna un numero aleatorio entre los valores indicados
+*/
+function rand(max, min) {
+  return Math.floor(Math.random() * max + min);
 }
 
 /*
@@ -186,6 +118,104 @@ function generarNumeroAleatorio(cantDigitos, repeticion, con_ceros) {
 }
 
 /*
+function esCorrecto( numero )
+entrada: 
+number: numero a comprobar
+return: boolean
+Esta funcion indica si el resultado igresado es correcto e informa cuantos numeros estan en su lugar,
+cuantos son parte del numero pero no estan en su lugar y cuantos no son parte del numero.
+a su vez indica si el numero ingresado cumple con los parametros requeridos
+*/
+function esCorrecto() {
+  let salida = false;
+  console.log(intento[0].value)
+  let comprobacion = verificacion(intento[0].value);
+
+  cant_intentos++;
+  if (comprobacion == "99") {
+    p.innerText =
+      `${intento[0].value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido
+
+        ` + p.innerText;
+  } else if (comprobacion[0] == 0 && comprobacion[1] == 0) {
+    p.innerText =
+      `${intento[0].value}, todos los numeros son incorrectos
+
+        ` + p.innerText;
+  } else if (comprobacion[0] == cant_numeros) {
+    document.location.href = "../pages/JuegoGanado.html";
+    salida = true;
+  } else {
+    p.innerText =
+      `${intento[0].value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion
+        
+        ` + p.innerText;
+  }
+
+  enfoqueDisplay();
+  intento[0].value = "";
+  return salida;
+}
+
+/*
+function verificacion( numero )
+entrada: 
+        array numerico: numero a desglosar
+return: array numerico
+Esta funcion analiza numero a numero si el numero ingresado es igual a la respuesta, y devuelve un valor asociado:
+el numero es parte de la respuesta y esta en el lugar correcto: salida[0]++
+el numero es parte de la respuesta pero no esta en el lugar indicado: salida[1]++
+el numero no forma parte de la respuesta: no cambia nada
+el numero no es valido: salida = 99
+  */
+function verificacion(numero) {
+  let salida = [0, 0];
+  if (!esValido(numero)) {
+    //analiza si el numero cumple con la condicion de la cantidad y repeticion de los digitos
+    salida = "99";
+  } else {
+    for (let j = 0; j < numero.length; j++) {
+      for (let i = 0; i < numero.length; i++) {
+        if (numero[i] == respuesta[j] && j == i) salida[0]++;
+        else if (numero[i] == respuesta[j]) salida[1]++;
+      }
+    }
+  }
+  return salida;
+}
+
+/*
+function setCantNumber(numero)
+entrada: 
+number: numero ingresado por la botonera
+return: none
+Esta funcion setea la cantidad de numeros con los que se jugara y modifica el header para dar nuevas indicaciones
+*/
+function setCantNumber(numero) {
+  cant_numeros = numero;
+
+  header[0].getElementsByTagName(
+    "h1"
+  )[0].innerText = `ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
+  for (let i = 0; i < 9; i++) {
+    boton_cant_numeros[i].hidden = "true";
+  }
+  main[0].style.display = "flex"; //muestro el pad-numerico
+  enfoqueDisplay();
+}
+
+/*
+function enfoqueDisplay()
+entrada: none
+return: none
+Esta funcion devuelve el foco al display. Se creo para simplificar sintaxis y aclarar codigo
+*/
+function enfoqueDisplay() {
+  intento[0].focus();
+}
+
+
+/*
 function esValido( numero )
 entrada: 
         number: numero a comprobar
@@ -194,101 +224,10 @@ Esta funcion valida si lo ingresado por el usuario es un numero valido o no, est
 */
 function esValido(numero) {
   let valido = true;
-  const NUMERO_MAX = 9999,
-    NUMERO_MIN = 999;
 
-  if (
-    seRepite(numero) ||
-    numero >= Math.pow(10, cant_numeros) ||
-    numero[0] == 0
-  ) {
+  if ((Math.floor(Number(numero)).toString().length - respuesta.length != 0) || seRepite(numero) || (numero >= Math.pow(10, cant_numeros)) || (numero[0] == 0)) {
     valido = false;
+    console.log(numero)
   }
   return valido;
-}
-
-/*
-function rand(max, min)
-entrada: 
-        number: max: numero maximo que devolvera
-        number: min: numero minimo que devolvera
-return: number: numero aleatorio
-Esta funcion retorna un numero aleatorio entre los valores indicados
-*/
-function rand(max, min) {
-  return Math.floor(Math.random() * max + min);
-}
-
-/*
-function mostrarHistorial(partidas)
-entrada: 
-        array class Partida: array de objetos con sus propiedades
-return: array numerico
-Esta funcion analiza las propiedades de las diferentes partidas y genera un alert en base a eso
-*/
-function mostrarHistorial(partidas) {
-  historial = [];
-  for (let i = 2; i <= 9; i++) {
-    let cant_partidas = 0;
-    let record = 0;
-    let aux = partidas.find((elm) => elm.cant_numeros == i);
-    if (aux != undefined) {
-      record = aux.intentos;
-    }
-    historial = ``;
-
-    partidas
-      .filter((elm) => elm.cant_numeros == i)
-      .forEach((partida) => {
-        if (partida.intentos < record) {
-          record = partida.intentos;
-        }
-        cant_partidas++;
-        historial =
-          historial +
-          `
-partida nro ${partida.nro_partida}
-cantidad de numeros: ${partida.cant_numeros}
-intentos: ${partida.intentos}
-`;
-      });
-    if (cant_partidas) {
-      alert(
-        `Jugando con ${i} numeros este es tu historial:
-cantidad de partidas:${cant_partidas}
-` +
-          historial +
-          `
-y tu record es de ${record} intentos`
-      );
-    }
-  }
-}
-
-/*
-function mostrarHistorial(partidas)
-entrada: 
-        bollean: error: se indica si ya hubo un error en la entrada del usuario o no
-return: array
-Esta funcion pide un numero al usuario
-*/
-function pedirNumero(error) {
-  if (error) {
-    intento = prompt(
-      `El numero ingresado no es valido. Por favor, ingrese un numero de ${cant_numeros} digitos (del 1 al 9)`
-    );
-    if (historial_intentos.find((elm) => elm == intento)) {
-      alert("ESE NUMERO YA LO PROBASTE, INTENTA DE NUEVO");
-      intento = [0, 0, 0, 0];
-    }
-  } else {
-    intento = prompt(`${historial_intentos}
-Elija un numero de ${cant_numeros} digitos (del 1 al 9)`);
-    if (historial_intentos.find((elm) => elm == intento)) {
-      alert("ESE NUMERO YA LO PROBASTE, INTENTA DE NUEVO");
-      intento = [0, 0, 0, 0];
-    }
-  }
-
-  return intento;
 }
