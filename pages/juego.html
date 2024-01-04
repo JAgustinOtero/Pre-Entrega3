@@ -8,39 +8,51 @@
 
 </head>
 <body>
-    <section>
-        <h1>
-            Elija la cantidad de numeros con la que va a jugar (del 0 al 9):
-        </h1>
-    </section>
-    <div id="principal">
-        <section id="pad-numerico">
-            <div id="display">
-                <input type="number" id="numero" maxlength="1">
+    <header>
+        <div>
+            <h1>
+                Elija la cantidad de numeros con la que va a jugar (del 1 al 9):
+            </h1>
+        </div>
+        <div class="header-botonera">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+        </div>
+    </header>
+    <main>
+        <section class="pad-numerico">
+            <div class="pad-numerico-display">
+                <input type="number" class="pad-numerico-display-input-numero" maxlength="1">
             </div>
             <div class="row">
-                <div><button>1</button></div>
-                <div><button>2</button></div>
-                <div><button>3</button></div>
+                <div><button class="pad-numerico-row-boton">1</button></div>
+                <div><button class="pad-numerico-row-boton">2</button></div>
+                <div><button class="pad-numerico-row-boton">3</button></div>
             </div>
             <div class="row">
-                <div><button>4</button></div>
-                <div><button>5</button></div>
-                <div><button>6</button></div>
+                <div><button class="pad-numerico-row-boton">4</button></div>
+                <div><button class="pad-numerico-row-boton">5</button></div>
+                <div><button class="pad-numerico-row-boton">6</button></div>
             </div>
             <div class="row">
-                <div><button>7</button></div>
-                <div><button>8</button></div>
-                <div><button>9</button></div>
+                <div><button class="pad-numerico-row-boton">7</button></div>
+                <div><button class="pad-numerico-row-boton">8</button></div>
+                <div><button class="pad-numerico-row-boton">9</button></div>
             </div>
             <div>
-                <button id="submit"> SUBMIT</button>
+                <button class="pad-numerico-submit-boton"> SUBMIT</button>
             </div>
         </section>
-        <section id="historial">
-    
+        <section class="historial">
         </section>
-    </div>
+    </main>
     <script src="../js/test.js"></script>
 </body>
 </html>

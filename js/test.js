@@ -1,12 +1,21 @@
-const SUBMIT = 9
+const SUBMIT = 0
 
 /* NODOS */
-let boton = document.getElementsByTagName('button')
-let historial = document.getElementById('historial')
-let intento = document.getElementById('numero')
-let header = document.getElementsByTagName('h1')
-intento.focus()
-intento.value = ''
+let header = document.getElementsByTagName('header')
+let boton_cant_numeros = header[0].getElementsByTagName("button")
+
+let main = document.getElementsByTagName("main")
+let intento = main[0].getElementsByClassName('pad-numerico-display-input-numero')
+let boton_numeral = main[0].getElementsByClassName('pad-numerico-row-boton')
+let boton_submit = main[0].getElementsByClassName('pad-numerico-submit-boton')
+let historial = main[0].getElementsByClassName('historial')
+
+
+let p = document.createElement('p')
+historial[0].append(p)
+
+intento[0].focus()
+intento[0].value = ''
 
 /* VARIABLES */
 cant_numeros = 0
@@ -16,46 +25,46 @@ let respuesta = 0
 
 /*MAIN */
 
-
+main[0].style.display = "none"
 
 
 
 /* LISTENERS */
 for(let i = 0; i<9; i++)
 {
-    boton[i].addEventListener('click', ()=>{
+    boton_numeral[i].addEventListener('click', ()=>{
         setnumber(i+1)
     })
+    boton_cant_numeros[i].addEventListener('click', ()=>{
+        setCantNumber(i+1)
+    })
 }
-intento.addEventListener('keypress', keypad)
-boton[SUBMIT].addEventListener('click', enviar)
+intento[0].addEventListener('keypress', keypad)
+boton_submit[SUBMIT].addEventListener('click', enviar)
 
 
 
 /* FUNCIONES */
 function setnumber(numero)
 {
-    intento.value += `${numero}`
-    intento.focus()
+    intento[0].value += `${numero}`
+    intento[0].focus()
 }
 
 function enviar( e )
 {
     if(cant_numeros == 0)
     {
-        if((intento.value > 0) && (intento.value < 9))
+        if((intento[0].value > 0) && (intento[0].value < 9))
         {
-            cant_numeros = intento.value
-            header[0].innerText = `ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`
-            respuesta = generarNumeroAleatorio(cant_numeros,false,false)
-            console.log(respuesta)
+            
         }
     }
     else 
-        esCorrecto(intento.value)
+        esCorrecto(intento[0].value)
 
-    intento.focus()
-    intento.value = ''
+    intento[0].focus()
+    intento[0].value = ''
 }
 
 function keypad(e)
@@ -145,14 +154,14 @@ function esCorrecto(numero) {
     cant_intentos++
     if (comprobacion == '99')
     {
-        let p = document.createElement('p')
-        p.innerText = `${intento.value}, la cantidad de numeros es incorrecta`
-        historial.append(p)
+        p.innerText = `${intento[0].value}, la cantidad de numeros es incorrecta
+
+        ` + p.innerText
     }
     else if (comprobacion[0] == 0 && comprobacion[1] == 0) {
-        let p = document.createElement('p')
-        p.innerText = `${intento.value}, todos los numeros son incorrectos`
-        historial.append(p)
+        p.innerText = `${intento[0].value}, todos los numeros son incorrectos
+
+        ` + p.innerText
     } 
     else if (comprobacion[0] == cant_numeros) {
         document.location.href = "../pages/JuegoGanado.html"
@@ -160,9 +169,9 @@ function esCorrecto(numero) {
     } 
     else
     {
-        let p = document.createElement('p')
-        p.innerText = `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`
-        historial.append(p)     
+        p.innerText = `${intento[0].value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion
+        
+        ` + p.innerText
     }
     console.log(
         ""
@@ -199,4 +208,17 @@ function verificacion(numero) {
         }
     }
     return salida;
+}
+
+function setCantNumber(numero)
+{
+    cant_numeros = numero
+    header[0].getElementsByTagName("h1")[0].innerText = `ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`
+    respuesta = generarNumeroAleatorio(cant_numeros,false,false)
+    console.log(respuesta)
+    for(let i = 0; i<9; i++)
+    {
+        boton_cant_numeros[i].hidden = "true"
+    }
+    main[0].style.display = "flex"
 }
