@@ -1,14 +1,8 @@
+
 body
 {
     height: 100vh;
     width: 100%;
-    font-size: 0px;
-    display: flex;
-    align-items: top;
-    flex-direction: column;
-    padding-top: 1vh;
-    padding-left: 3%;
-    margin-top: 0px;
 }
 
 header
@@ -16,6 +10,11 @@ header
     height: 20vh;
 }
 
+.h-20
+{
+    height: 19%;
+}
+/*
 header div
 {
     height: 30%;
@@ -44,14 +43,12 @@ header div h1
     border-radius: 5px;
     border: #000 solid 2px;
 }
-
+*/
 main
 {
-    display: flex;
-    align-items: top;
-    height: 75vh;
+    height: 60vh;
 }
-
+/*
 header h1
 {
     font-size: 2rem;
@@ -125,3 +122,4 @@ header h1
 {
     font-size: 1.1rem;
 }
+*/

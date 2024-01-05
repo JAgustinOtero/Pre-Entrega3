@@ -5,54 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de los Numeros</title>
     <link rel="stylesheet" href="../css/stylesJuego.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
-<body>
+<body class="d-flex flex-column bg-dark text-white">
     <header>
-        <div>
-            <h1>
+        <div >
+            <h1 class="text-center">
                 Elija la cantidad de numeros con la que va a jugar (del 1 al 9):
             </h1>
         </div>
-        <div class="header-botonera">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+        <div class="header-botonera d-flex justify-content-around">
+            <button type="button" class="col-1 btn btn-primary fs-2">1</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">2</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">3</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">4</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">5</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">6</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">7</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">8</button>
+            <button type="button" class="col-1 btn btn-primary fs-2">9</button>
         </div>
     </header>
-    <main>
-        <section class="pad-numerico">
-            <div class="pad-numerico-display">
-                <input type="number" class="pad-numerico-display-input-numero" maxlength="1">
+    <main class="">
+        <section class="pad-numerico col-4 h-100 border border-dark border-3 rounded-3 m-3 p-3 bg-secondary">
+            <div class="pad-numerico-display h-20 row align-items-center">
+                <div class="input-group h-50">
+                    <input type="text" class="form-control pad-numerico-display-input-numero fs-3" placeholder="Ingrese su numero" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
             </div>
-            <div class="row">
-                <div><button class="pad-numerico-row-boton">1</button></div>
-                <div><button class="pad-numerico-row-boton">2</button></div>
-                <div><button class="pad-numerico-row-boton">3</button></div>
+            <div class="row justify-content-around h-20">
+                <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">1</button></div>
+                <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">2</button></div>
+                <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">3</button></div>
             </div>
-            <div class="row">
-                <div><button class="pad-numerico-row-boton">4</button></div>
-                <div><button class="pad-numerico-row-boton">5</button></div>
-                <div><button class="pad-numerico-row-boton">6</button></div>
+            <div class="row justify-content-around h-20">
+                <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">4</button></div>
+                <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">5</button></div>
+                <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">6</button></div>
             </div>
-            <div class="row">
-                <div><button class="pad-numerico-row-boton">7</button></div>
-                <div><button class="pad-numerico-row-boton">8</button></div>
-                <div><button class="pad-numerico-row-boton">9</button></div>
+            <div class="row justify-content-around h-20">
+                <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">7</button></div>
+                <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">8</button></div>
+                <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">9</button></div>
             </div>
-            <div>
-                <button class="pad-numerico-submit-boton"> SUBMIT</button>
+            <div class="row h-20 w-100 d-flex justify-content-center mt-3">
+                <div  class=" col-12 h-100"><button type="button" class="pad-numerico-submit-boton w-100 h-100 btn btn-primary rounded-5 fs-1">SUBMIT</button></div>
             </div>
         </section>
-        <section class="historial">
+        <section class="historial w-75">
+            <template class="historial-template">
+                <div style="height: 5vh;" class="border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                    <p class="m-0" ></p>
+                </div>
+            </template>
         </section>
     </main>
     <script src="../js/juego.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

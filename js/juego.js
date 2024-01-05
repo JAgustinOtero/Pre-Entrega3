@@ -1,33 +1,33 @@
-const SUBMIT = 0;
+/*************************************************************************DOM*******************************************************************/
+let header = document.querySelector("header");
+let boton_cant_numeros = header.getElementsByTagName("button");
 
-/* NODOS */
-let header = document.getElementsByTagName("header");
-let boton_cant_numeros = header[0].getElementsByTagName("button");
-
-let main = document.getElementsByTagName("main");
-let intento = main[0].getElementsByClassName(
-  "pad-numerico-display-input-numero"
-);
-let boton_numeral = main[0].getElementsByClassName("pad-numerico-row-boton");
-let boton_submit = main[0].getElementsByClassName("pad-numerico-submit-boton");
-let historial = main[0].getElementsByClassName("historial");
+let main = document.querySelector("main");
+let intento = main.querySelector(".pad-numerico-display-input-numero");
+let boton_numeral = main.getElementsByClassName("pad-numerico-row-boton");
+let boton_submit = main.querySelector(".pad-numerico-submit-boton");
+let historial = main.querySelector(".historial");
 
 let p = document.createElement("p");
-historial[0].append(p);
 
-enfoqueDisplay();
-intento[0].value = "";
 
-/* VARIABLES */
+
+
+/*************************************************************************VARIABLES*******************************************************************/
 cant_numeros = 0;
 cant_intentos = 0;
 let respuesta = 0;
 
-/*MAIN */
 
-main[0].style.display = "none";
 
-/* LISTENERS */
+/*************************************************************************MAIN*******************************************************************/
+enfoqueDisplay();
+intento.value = "";
+main.style.display = "none";
+
+
+
+/*************************************************************************LISTENERS*******************************************************************/
 for (let i = 0; i < 9; i++) {
   boton_numeral[i].addEventListener("click", () => {
     setnumber(i + 1);
@@ -38,13 +38,17 @@ for (let i = 0; i < 9; i++) {
     console.log(respuesta);
   });
 }
-intento[0].addEventListener("keypress", keypad);
-boton_submit[SUBMIT].addEventListener("click", esCorrecto);
+intento.addEventListener("keypress", keypad);
+boton_submit.addEventListener("click", esCorrecto);
+
+
+
+
 
 /*************************************************************************FUNCIONES*******************************************************************/
 
 function setnumber(numero) {
-  intento[0].value += `${numero}`;
+  intento.value += `${numero}`;
   enfoqueDisplay();
 }
 
@@ -128,32 +132,29 @@ a su vez indica si el numero ingresado cumple con los parametros requeridos
 */
 function esCorrecto() {
   let salida = false;
-  console.log(intento[0].value)
-  let comprobacion = verificacion(intento[0].value);
+  console.log(intento.value)
+  let comprobacion = verificacion(intento.value);
 
   cant_intentos++;
   if (comprobacion == "99") {
-    p.innerText =
-      `${intento[0].value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido
-
-        ` + p.innerText;
+      let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
+      tempalte.querySelector('p').innerText = `${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`
+      historial.append(tempalte)
   } else if (comprobacion[0] == 0 && comprobacion[1] == 0) {
-    p.innerText =
-      `${intento[0].value}, todos los numeros son incorrectos
-
-        ` + p.innerText;
+    let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
+    tempalte.querySelector('p').innerText = `${intento.value}, todos los numeros son incorrectos`
+    historial.append(tempalte)
   } else if (comprobacion[0] == cant_numeros) {
     document.location.href = "../pages/JuegoGanado.html";
     salida = true;
   } else {
-    p.innerText =
-      `${intento[0].value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion
-        
-        ` + p.innerText;
+    let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
+    tempalte.querySelector('p').innerText = `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`
+    historial.append(tempalte)
   }
 
   enfoqueDisplay();
-  intento[0].value = "";
+  intento.value = "";
   return salida;
 }
 
@@ -194,13 +195,13 @@ Esta funcion setea la cantidad de numeros con los que se jugara y modifica el he
 function setCantNumber(numero) {
   cant_numeros = numero;
 
-  header[0].getElementsByTagName(
+  header.getElementsByTagName(
     "h1"
-  )[0].innerText = `ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
+  )[0].innerText = `  Ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
   for (let i = 0; i < 9; i++) {
     boton_cant_numeros[i].hidden = "true";
   }
-  main[0].style.display = "flex"; //muestro el pad-numerico
+  main.style.display = "flex"; //muestro el pad-numerico
   enfoqueDisplay();
 }
 
@@ -211,9 +212,8 @@ return: none
 Esta funcion devuelve el foco al display. Se creo para simplificar sintaxis y aclarar codigo
 */
 function enfoqueDisplay() {
-  intento[0].focus();
+  intento.focus();
 }
-
 
 /*
 function esValido( numero )
