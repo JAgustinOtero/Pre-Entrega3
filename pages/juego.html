@@ -28,46 +28,81 @@
         </div>
     </header>
     <main class="flex-column">
-        <section class="d-flex pad-numerico"> 
-            <div class="col-4-sm h-100 border border-dark border-3 rounded-3 p-4 bg-secondary">
-                <div class="pad-numerico-display h-20 row align-items-center">
-                    <div class="input-group h-50">
-                        <input type="text" class="form-control pad-numerico-display-input-numero fs-3" placeholder="Ingrese su numero" aria-label="Username" aria-describedby="basic-addon1">
-                      </div>
-                </div>
-                <div class="row justify-content-around h-20">
-                    <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">1</button></div>
-                    <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">2</button></div>
-                    <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">3</button></div>
-                </div>
-                <div class="row justify-content-around h-20">
-                    <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">4</button></div>
-                    <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">5</button></div>
-                    <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">6</button></div>
-                </div>
-                <div class="row justify-content-around h-20">
-                    <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">7</button></div>
-                    <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">8</button></div>
-                    <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">9</button></div>
-                </div>
-                <div class="row h-20 w-100 d-flex justify-content-center mt-3">
-                    <div  class=" col-12 h-100"><button type="button" class="pad-numerico-submit-boton w-100 h-100 btn btn-primary rounded-5 fs-1">SUBMIT</button></div>
+        <section class="d-flex p-4"> 
+            <div class="p-4 pad-numerico">
+                <div class="h-100 border border-dark border-3 rounded-5 p-4 pt-1 bg-secondary">
+                    <div class="pad-numerico-display h-20 row align-items-center">
+                        <div class="input-group h-50">
+                            <input type="text" class="form-control pad-numerico-display-input-numero fs-3" placeholder="Ingrese su numero" aria-label="Username" aria-describedby="basic-addon1">
+                          </div>
+                    </div>
+                    <div class="row justify-content-around h-20">
+                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">1</button></div>
+                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">2</button></div>
+                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">3</button></div>
+                    </div>
+                    <div class="row justify-content-around h-20">
+                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">4</button></div>
+                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">5</button></div>
+                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">6</button></div>
+                    </div>
+                    <div class="row justify-content-around h-20">
+                        <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">7</button></div>
+                        <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">8</button></div>
+                        <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">9</button></div>
+                    </div>
+                    <div class="row h-20 col-12 d-flex justify-content-center mt-3">
+                        <div  class=" col-8 h-100"><button type="button" class="pad-numerico-submit-boton w-100 h-100 btn btn-primary rounded-5 fs-1">SUBMIT</button></div>
+                        <div  class=" col-4 h-100"><button type="button" class="pad-numerico-clean-boton w-100 h-100 btn btn-primary rounded-5 fs-1"> C </button></div>
+                    </div>
                 </div>
             </div>
-            <div class="historial col-8-sm">
-                <template class="historial-template">
-                    <div style="height: 5vh;" class="border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
-                        <p class="m-0" ></p>
+            <div class="historial col-8">
+                <template class="historial-template w-100">
+                    <div style="height: 5vh;" class="div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                        <p class="m-0"></p>
                     </div>
                 </template>
             </div>
         </section>
-        <section class="partidas">
-            <template class="partidas-template">
-                <div style="height: 5vh;" class="border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
-                    <p class="m-0" ></p>
+
+        <section class="partidas d-flex flex-column">
+
+            <div class="d-flex justify-content-around m-4">
+                <div class="col-3"><button class="borrar-historial-boton w-100 btn btn-primary fs-2 rounded-5">BORRAR HISTORIAL</button></div>
+                <div class="col-3"><button class="rendirse-boton w-100 btn btn-primary fs-2 rounded-5">RENDIRSE</button></div>
+                <div class="col-3"><button class="pista-boton w-100 btn btn-primary fs-2 rounded-5">PISTA</button></div>
+            </div>
+
+            <div class="d-flex flex-column justify-content-center">
+                <div class="text-center w-100" >
+                    <h1 >HISTORIAL</h1>
                 </div>
-            </template>
+                <div  class="d-flex justify-content-around">
+                    <div class="partidas-historial  col-7">
+                        <template class="partidas-template">
+                            <div style="height: 5vh;" class="div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                                <p class="m-0" ></p>
+                            </div>
+                        </template>
+                    </div>
+    
+                    <div class="col-4">
+                        <div class="info">
+                            <div style="height: 5vh;" class="info-record div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                                <p class="m-0" >record de intentos:</p>
+                            </div>
+                            <div style="height: 5vh;" class="info-numero div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                                <p class="m-0" >Partida ganada con mayor cant. de numeros:</p>
+                            </div>
+                            <div style="height: 5vh;" class="info-rendicion div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                                <p class="m-0" >Veces que te rendiste:</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
     </main>
 

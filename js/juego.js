@@ -1,27 +1,25 @@
 /*************************************************************************DOM*******************************************************************/
-let header = document.querySelector("header");
+let header = document.querySelector("header")
 let header_botonera = header.querySelector(".header-botonera")
-let boton_cant_numeros = header.getElementsByTagName("button");
 
+let main = document.querySelector("main")
+let intento = main.querySelector(".pad-numerico-display-input-numero")
+let historial = main.querySelector(".historial")
 
-let main = document.querySelector("main");
-let intento = main.querySelector(".pad-numerico-display-input-numero");
-let boton_numeral = main.getElementsByClassName("pad-numerico-row-boton");
-let boton_submit = main.querySelector(".pad-numerico-submit-boton");
-let historial = main.querySelector(".historial");
+let historial_partidas = main.querySelector(".partidas")
 
-let historial_partidas = main.querySelector(".partidas");
-
-let p = document.createElement("p");
+let p = document.createElement("p")
 
 
 
 /*************************************************************************CLASES*******************************************************************/
 class Partida {
-  constructor(cant_numeros, intentos, nro_partida) {
+  constructor(cant_numeros, intentos, nro_partida, cant_pistas) {
     this.cant_numeros = cant_numeros;
     this.intentos = intentos;
     this.nro_partida = nro_partida;
+    this.pistas = cant_pistas
+    this.rendicion = false
   }
 }
 
@@ -32,9 +30,12 @@ class Partida {
 let cant_numeros = 0;
 let cant_intentos = 0;
 let respuesta = 0;
-let nro_partida = Number(localStorage.getItem("nro_partida")) ;
+let nro_partida = Number(localStorage.getItem("nro_partida")) + 1;
 let partidas = []
 let partidasLS = []
+let cant_pistas = 0
+
+
 
 
 
@@ -42,26 +43,68 @@ let partidasLS = []
 /*************************************************************************MAIN*******************************************************************/
 enfoqueDisplay();
 intento.value = "";
-intento.ariaReadOnly = "readonly"
 header_botonera.style.display = "flex"
+historial_partidas.querySelector(".rendirse-boton").style.display = "none"
+historial_partidas.querySelector(".pista-boton").style.display = "none"
 nro_partida ||= 1
-mostrarPartidas(partidas)
+if(nro_partida == 1)
+  historial_partidas.querySelector(".borrar-historial-boton").style.display = "none"
+mostrarPartidas(partidas,nro_partida-1)
+intento.disabled = true
 
 
 
 /*************************************************************************LISTENERS*******************************************************************/
 for (let i = 0; i < 9; i++) {
-  boton_numeral[i].addEventListener("click", () => {
+  main.getElementsByClassName("pad-numerico-row-boton")[i].addEventListener("click", () => {
     setnumber(i + 1);
   });
-  boton_cant_numeros[i].addEventListener("click", () => {
+  header.getElementsByTagName("button")[i].addEventListener("click", () => {
     setCantNumber(i + 1);
     respuesta = generarNumeroAleatorio(cant_numeros, false, false); //genero un numero random con la cantidad de numeros elegidos
     console.log(respuesta);
   });
 }
 intento.addEventListener("keypress", keypad);
-boton_submit.addEventListener("click", esCorrecto);
+main.querySelector(".pad-numerico-submit-boton").addEventListener("click", esCorrecto);
+main.querySelector(".pad-numerico-clean-boton").addEventListener("click", ()=>{
+  intento.value = ""
+})
+
+historial_partidas.querySelector(".borrar-historial-boton").addEventListener("click", ()=>{
+  nro_partida = 0
+  mostrarPartidas(partidas,nro_partida)
+  reset()
+  localStorage.clear()
+  localStorage.setItem("nro_partida",0)
+})
+
+historial_partidas.querySelector(".rendirse-boton").addEventListener("click", ()=>{
+  if(confirm("Estas Seguro que deseas Rendirte?"))
+  {
+    let partida_rendida = new Partida(cant_numeros,cant_intentos,nro_partida,cant_pistas)
+    partida_rendida.rendicion = true
+    localStorage.setItem(`partida${nro_partida}`,JSON.stringify(partida_rendida))
+    mostrarPartidas(partidas,nro_partida)
+    reset()
+  }
+})
+
+historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
+  if(cant_pistas < cant_numeros - 1)
+  {
+    mostrarDiv(historial ,"historial-template", 'prepend' , `el numero en la posiscion ${cant_pistas+1} es ${respuesta[cant_pistas]} `)
+    cant_pistas++
+  }
+  else if (confirm("Si pedis esta ultima pista, vas a perder automaticamente"))
+  {
+    let partida_rendida = new Partida(cant_numeros,cant_intentos,nro_partida,cant_pistas)
+    partida_rendida.rendicion = true
+    localStorage.setItem(`partida${nro_partida}`,JSON.stringify(partida_rendida))
+    mostrarPartidas(partidas,nro_partida)
+    reset()
+  }
+})
 
 
 
@@ -70,7 +113,8 @@ boton_submit.addEventListener("click", esCorrecto);
 /*************************************************************************FUNCIONES*******************************************************************/
 
 function setnumber(numero) {
-  intento.value += `${numero}`;
+  if(cant_numeros != 0)
+    intento.value += `${numero}`;
   enfoqueDisplay();
 }
 
@@ -153,33 +197,27 @@ cuantos son parte del numero pero no estan en su lugar y cuantos no son parte de
 a su vez indica si el numero ingresado cumple con los parametros requeridos
 */
 function esCorrecto() {
-  let salida = false;
   console.log(intento.value)
   let comprobacion = verificacion(intento.value);
 
   cant_intentos++;
-  if (comprobacion == "99") {
-      let template = getTemplate("historial-template")
-      template.querySelector('p').innerText = `${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`
-      historial.append(template)
-  } else if (comprobacion[0] == 0 && comprobacion[1] == 0) {
-    let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
-    tempalte.querySelector('p').innerText = `${intento.value}, todos los numeros son incorrectos`
-    historial.append(tempalte)
-  } else if (comprobacion[0] == cant_numeros) {
-    localStorage.setItem(`partida${nro_partida}`,JSON.stringify(new Partida(cant_numeros,cant_intentos,nro_partida)))
-    mostrarPartidas(partidas)
-    salida = true;
+  if (comprobacion == "99"){
+      mostrarDiv(historial,"historial-template",'prepend',`${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`)
+  }
+  else if (comprobacion[0] == 0 && comprobacion[1] == 0) {
+    mostrarDiv(historial,"historial-template",'prepend',`${intento.value}, todos los numeros son incorrectos`)
+  }
+  else if (comprobacion[0] == cant_numeros) {
+    localStorage.setItem(`partida${nro_partida}`,JSON.stringify(new Partida(cant_numeros,cant_intentos,nro_partida,cant_pistas)))
+    mostrarPartidas(partidas, nro_partida)
     reset()
-  } else {
-    let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
-    tempalte.querySelector('p').innerText = `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`
-    historial.append(tempalte)
+  }
+  else {
+    mostrarDiv(historial ,"historial-template",'prepend', `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
   }
 
   enfoqueDisplay();
   intento.value = "";
-  return salida;
 }
 
 /*
@@ -218,11 +256,14 @@ Esta funcion setea la cantidad de numeros con los que se jugara y modifica el he
 */
 function setCantNumber(numero) {
   cant_numeros = numero;
-
   header.querySelector("h1").innerText = `  Ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
   header_botonera.style.display = "none"
+  historial_partidas.querySelector(".rendirse-boton").style.display = "block"
+  historial_partidas.querySelector(".pista-boton").style.display = "block"
   main.style.display = "flex"; //muestro el pad-numerico
+  intento.disabled = false 
   enfoqueDisplay();
+
 }
 
 /*
@@ -233,6 +274,7 @@ Esta funcion devuelve el foco al display. Se creo para simplificar sintaxis y ac
 */
 function enfoqueDisplay() {
   intento.focus();
+  
 }
 
 /*
@@ -260,33 +302,96 @@ function getTemplate( templateName )
 
 function reset()
 {
-  header.querySelector("h1").innerText = `Felicidades Ganaste!!! el numero era ${intento.value} y lo adivinaste en solo ${cant_intentos} ${cant_intentos == 1 ? "intento": "intentos"}
-    Elija la cantidad de numeros con la que va a jugar (del 1 al 9):`; //modifico el header y muestro los botones
+  const TEXTO_VICTORIA = `Felicidades Ganaste!!! el numero era ${intento.value} y lo adivinaste en solo ${cant_intentos} ${cant_intentos == 1 ? "intento": "intentos"}
+  Elija la cantidad de numeros con la que va a jugar (del 1 al 9):`
+  const TEXTO_BORRAR_HISTORIAL = `Borraste el historial, listo para empezar denuevo?
+  Elija la cantidad de numeros con la que va a jugar (del 1 al 9):`
+  
+  if(localStorage.getItem(`partida${nro_partida}`) != null)
+  {
+    if (JSON.parse(localStorage.getItem(`partida${nro_partida}`)).rendicion)
+    {
+      const TEXTO_DERROTA = `Que lastima perdiste!!! el numero era ${Number(respuesta.join(''))} y no lo adivinaste ni en ${cant_intentos} ${cant_intentos == 1 ? "intento": "intentos"}
+      Elija la cantidad de numeros con la que va a jugar (del 1 al 9):`
+      
+      header.querySelector("h1").innerText = TEXTO_DERROTA
+    }
+    else
+    header.querySelector("h1").innerText = TEXTO_VICTORIA
+  } 
+  else
+  {
+    header.querySelector("h1").innerText = TEXTO_BORRAR_HISTORIAL
+  }
+  
+    // reinicio las variables
   intento.value = "";
-  //main.style.display = "none";
   cant_numeros = 0
   cant_intentos = 0
+  cant_pistas = 0
+  //muestro la botonera del header y oculto los botones de rendicion y de pistas y bloque el input
   header_botonera.style.display = "flex"
+  historial_partidas.querySelector(".rendirse-boton").style.display = "none"
+  historial_partidas.querySelector(".pista-boton").style.display = "none"
+  
+  intento.disabled = true
+
   localStorage.setItem("nro_partida",nro_partida)
   nro_partida++
 
-  while(historial.childElementCount > 1)
-  historial.querySelector("div").remove()
+  if(nro_partida == 1) historial_partidas.querySelector(".borrar-historial-boton").style.display = "none"
+  else historial_partidas.querySelector(".borrar-historial-boton").style.display = "block"
 
+  while(historial.childElementCount > 1)
+    historial.querySelector("div").remove()
 }
 
-function mostrarPartidas ( partidas )
+function mostrarPartidas ( partidas, nro_partida )
 {
+  let perdidas = 0
+  let record = [0]
+  let mayor_num = [0]
+
+  while(historial_partidas.querySelector(".partidas-historial").childElementCount > 1)
+    historial_partidas.querySelector(".div-template").remove()
+
   for(let i=1; i <= nro_partida; i++)
     {
       partidas[i] = JSON.parse(localStorage.getItem(`partida${i}`))
+
+      if(partidas[i] != null)
+      { 
+        if (partidas[i].rendicion)
+        {
+          mostrarDiv(historial_partidas.querySelector(".partidas-historial") ,"partidas-template",'append', `partida Nro ${partidas[i].nro_partida}: Jugaste con ${partidas[i].cant_numeros} numeros y luego de ${partidas[i].intentos} ${partidas[i].intentos == 1 ? "intento": "intentos"} te rendiste aun habiendo utilizado ${partidas[i].pistas} ${partidas[i].pistas == 1 ? "pista": "pistas"} `)
+          perdidas++
+          mayor_num[i-1] = 0
+          record[i-1] = 10000000
+        }
+        else
+        {
+          mostrarDiv(historial_partidas.querySelector(".partidas-historial") ,"partidas-template",'append', `partida Nro ${partidas[i].nro_partida}: Jugaste con ${partidas[i].cant_numeros} numeros, te tomo ${partidas[i].intentos} ${partidas[i].intentos == 1 ? "intento": "intentos"} y utilizaste ${partidas[i].pistas} ${partidas[i].pistas == 1 ? "pista": "pistas"}`)
+          record[i-1] = partidas[i].intentos
+          mayor_num[i-1] = partidas[i].cant_numeros
+        }
+      }
     }
-  while(historial_partidas.childElementCount > 1)
-    historial_partidas.querySelector("div").remove()
-    partidas.forEach( (Partida)=>
-  {
-    let template = getTemplate("partidas-template")
-    template.querySelector('p').innerText = `partida Nro ${Partida.nro_partida}: Jugaste con ${Partida.cant_numeros} numeros y te tomo ${Partida.intentos} ${Partida.intentos == 1 ? "intento": "intentos"}`
-    historial_partidas.append(template)
-  })
+    mostrarEstadisticas(record,mayor_num,perdidas)
+}
+
+function mostrarDiv(nodo ,templatename, modo, texto)
+{
+  let template = getTemplate(templatename)
+  template.querySelector('p').innerText = texto
+  if (modo == 'append') nodo.append(template)
+  else if (modo == 'prepend') nodo.prepend(template)
+}
+
+function mostrarEstadisticas(record,mayor_num,perdidas)
+{
+    record.sort()
+    mayor_num.sort()
+    historial_partidas.querySelector(".info-record").querySelector("p").innerText = `record de intentos: ${record[0]} ${record[0] == 1 ? "intento": "intentos"}`
+    historial_partidas.querySelector(".info-numero").querySelector("p").innerText = `Partida ganada con mayor cant. de numeros: ${mayor_num[mayor_num.length-1]}`
+    historial_partidas.querySelector(".info-rendicion").querySelector("p").innerText = `Veces que te rendiste: ${perdidas}`
 }

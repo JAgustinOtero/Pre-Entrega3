@@ -46,12 +46,12 @@ header div h1
 */
 main
 {
-    height: auto;
+    height: fit-content;
 }
 
 .pad-numerico
 {
-    height: 70vh;
+    height: 60vh;
     padding: 5vh;
 }
 /*
