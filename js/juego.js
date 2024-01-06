@@ -1,6 +1,8 @@
 /*************************************************************************DOM*******************************************************************/
 let header = document.querySelector("header");
+let header_botonera = header.querySelector(".header-botonera")
 let boton_cant_numeros = header.getElementsByTagName("button");
+
 
 let main = document.querySelector("main");
 let intento = main.querySelector(".pad-numerico-display-input-numero");
@@ -8,22 +10,42 @@ let boton_numeral = main.getElementsByClassName("pad-numerico-row-boton");
 let boton_submit = main.querySelector(".pad-numerico-submit-boton");
 let historial = main.querySelector(".historial");
 
+let historial_partidas = main.querySelector(".partidas");
+
 let p = document.createElement("p");
+
+
+
+/*************************************************************************CLASES*******************************************************************/
+class Partida {
+  constructor(cant_numeros, intentos, nro_partida) {
+    this.cant_numeros = cant_numeros;
+    this.intentos = intentos;
+    this.nro_partida = nro_partida;
+  }
+}
 
 
 
 
 /*************************************************************************VARIABLES*******************************************************************/
-cant_numeros = 0;
-cant_intentos = 0;
+let cant_numeros = 0;
+let cant_intentos = 0;
 let respuesta = 0;
+let nro_partida = Number(localStorage.getItem("nro_partida")) ;
+let partidas = []
+let partidasLS = []
+
 
 
 
 /*************************************************************************MAIN*******************************************************************/
 enfoqueDisplay();
 intento.value = "";
-main.style.display = "none";
+intento.ariaReadOnly = "readonly"
+header_botonera.style.display = "flex"
+nro_partida ||= 1
+mostrarPartidas(partidas)
 
 
 
@@ -137,16 +159,18 @@ function esCorrecto() {
 
   cant_intentos++;
   if (comprobacion == "99") {
-      let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
-      tempalte.querySelector('p').innerText = `${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`
-      historial.append(tempalte)
+      let template = getTemplate("historial-template")
+      template.querySelector('p').innerText = `${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`
+      historial.append(template)
   } else if (comprobacion[0] == 0 && comprobacion[1] == 0) {
     let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
     tempalte.querySelector('p').innerText = `${intento.value}, todos los numeros son incorrectos`
     historial.append(tempalte)
   } else if (comprobacion[0] == cant_numeros) {
-    document.location.href = "../pages/JuegoGanado.html";
+    localStorage.setItem(`partida${nro_partida}`,JSON.stringify(new Partida(cant_numeros,cant_intentos,nro_partida)))
+    mostrarPartidas(partidas)
     salida = true;
+    reset()
   } else {
     let tempalte = document.getElementsByClassName("historial-template")[0].content.cloneNode(true)
     tempalte.querySelector('p').innerText = `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`
@@ -195,12 +219,8 @@ Esta funcion setea la cantidad de numeros con los que se jugara y modifica el he
 function setCantNumber(numero) {
   cant_numeros = numero;
 
-  header.getElementsByTagName(
-    "h1"
-  )[0].innerText = `  Ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
-  for (let i = 0; i < 9; i++) {
-    boton_cant_numeros[i].hidden = "true";
-  }
+  header.querySelector("h1").innerText = `  Ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
+  header_botonera.style.display = "none"
   main.style.display = "flex"; //muestro el pad-numerico
   enfoqueDisplay();
 }
@@ -230,4 +250,43 @@ function esValido(numero) {
     console.log(numero)
   }
   return valido;
+}
+
+function getTemplate( templateName )
+{
+  let template = document.getElementsByClassName(templateName)[0].content.cloneNode(true)
+  return template
+}
+
+function reset()
+{
+  header.querySelector("h1").innerText = `Felicidades Ganaste!!! el numero era ${intento.value} y lo adivinaste en solo ${cant_intentos} ${cant_intentos == 1 ? "intento": "intentos"}
+    Elija la cantidad de numeros con la que va a jugar (del 1 al 9):`; //modifico el header y muestro los botones
+  intento.value = "";
+  //main.style.display = "none";
+  cant_numeros = 0
+  cant_intentos = 0
+  header_botonera.style.display = "flex"
+  localStorage.setItem("nro_partida",nro_partida)
+  nro_partida++
+
+  while(historial.childElementCount > 1)
+  historial.querySelector("div").remove()
+
+}
+
+function mostrarPartidas ( partidas )
+{
+  for(let i=1; i <= nro_partida; i++)
+    {
+      partidas[i] = JSON.parse(localStorage.getItem(`partida${i}`))
+    }
+  while(historial_partidas.childElementCount > 1)
+    historial_partidas.querySelector("div").remove()
+    partidas.forEach( (Partida)=>
+  {
+    let template = getTemplate("partidas-template")
+    template.querySelector('p').innerText = `partida Nro ${Partida.nro_partida}: Jugaste con ${Partida.cant_numeros} numeros y te tomo ${Partida.intentos} ${Partida.intentos == 1 ? "intento": "intentos"}`
+    historial_partidas.append(template)
+  })
 }

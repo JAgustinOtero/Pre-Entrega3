@@ -1,13 +1,13 @@
 
 body
 {
-    height: 100vh;
+    height: auto;
     width: 100%;
 }
 
 header
 {
-    height: 20vh;
+    height: 25vh;
 }
 
 .h-20
@@ -46,7 +46,13 @@ header div h1
 */
 main
 {
-    height: 60vh;
+    height: auto;
+}
+
+.pad-numerico
+{
+    height: 70vh;
+    padding: 5vh;
 }
 /*
 header h1
