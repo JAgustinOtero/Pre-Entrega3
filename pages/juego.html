@@ -10,7 +10,7 @@
 </head>
 <body class="d-flex flex-column bg-dark text-white">
     <header>
-        <div >
+        <div style="height: auto;" >
             <h1 class="text-center">
                 Elija la cantidad de numeros con la que va a jugar (del 1 al 9):
             </h1>
@@ -58,11 +58,14 @@
                 </div>
             </div>
             <div class="historial col-8">
-                <template class="historial-template w-100">
-                    <div style="height: 5vh;" class="div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
-                        <p class="m-0"></p>
-                    </div>
-                </template>
+                <h1>CANTIDAD DE INTENTOS: 0</h1>
+                <div style="height: 80%;" class="historial-div">
+                    <template class="historial-template w-100">
+                        <div style="height: 5vh;" class="div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                            <p class="m-0"></p>
+                        </div>
+                    </template>
+                </div>
             </div>
         </section>
 
@@ -88,16 +91,13 @@
                     </div>
     
                     <div class="col-4">
-                        <div class="info">
-                            <div style="height: 5vh;" class="info-record div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
-                                <p class="m-0" >record de intentos:</p>
-                            </div>
-                            <div style="height: 5vh;" class="info-numero div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
-                                <p class="m-0" >Partida ganada con mayor cant. de numeros:</p>
-                            </div>
-                            <div style="height: 5vh;" class="info-rendicion div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
-                                <p class="m-0" >Veces que te rendiste:</p>
-                            </div>
+                        <div class="info d-flex flex-column">
+                            <template class="estadisticas-template">
+                                <div style="height: auto;" class="info-div d-flex flex-column align-items-center w-100 bg-secondary m-2 rounded-5">
+                                    <h1 style="height: 2vh;">RECORD DE INTENTOS</h1>
+                                    <p style="font-size: 10rem;">5</p>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
