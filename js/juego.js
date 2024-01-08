@@ -326,6 +326,7 @@ function reset()
 {
   const TEXTO_INICIO = `Elija la cantidad de numeros con la que va a jugar (del 1 al 9):`
   let partida = JSON.parse(localStorage.getItem(`partida${nro_partida-1}`))
+
   mostrarPartidas()
 
   header.querySelector("h1").innerText = localStorage.getItem(`partida${nro_partida-1}`) != null?
@@ -359,14 +360,15 @@ function reset()
  */
 function mostrarPartidas ()
 {
+  let partidas = []
+  
   borrarElementos(historial_partidas.querySelector(".partidas-historial"), ".div-template", 1)
 
   for(let i=1; i < nro_partida; i++)
-    {
-      partidas[i] = JSON.parse(localStorage.getItem(`partida${i}`))
-    }
-    // partidas = partidas.shift()
-    evaluarPartidas(partidas)
+  {
+    partidas[i] = JSON.parse(localStorage.getItem(`partida${i}`))
+  }
+  evaluarPartidas(partidas)
 }
 
 /** 
@@ -505,6 +507,8 @@ function evaluarPartidas(partidas){
     new Estadistica("CANTIDAD DE PARTIDAS",0)
   ]
   
+  console.log(partidas)
+
   for(let i = 1; i < partidas.length; i++)
   {
     const TEXTO_DERRORTA = `partida Nro ${partidas[i].nro_partida}: Jugaste con ${partidas[i].cant_numeros} numeros y luego de ${partidas[i].intentos} ${partidas[i].intentos == 1 ? "intento": "intentos"} te rendiste aun habiendo utilizado ${partidas[i].pistas} ${partidas[i].pistas == 1 ? "pista": "pistas"} `
