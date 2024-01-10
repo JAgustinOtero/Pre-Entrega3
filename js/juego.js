@@ -1,3 +1,4 @@
+// import Swal from '../sweetalert2/dist/sweetalert2.js'
 /*************************************************************************DOM*******************************************************************/
 let header = document.querySelector("header")
 let header_botonera = header.querySelector(".header-botonera")
@@ -13,9 +14,9 @@ let info = historial_partidas.querySelector(".info")
 
 
 /*************************************************************************CLASES*******************************************************************/
- /** 
+/** 
  * Partida con todas sus indicaciones correspondientes
- *
+*
  * @param cant_numeros Number: cantidad de numeros con los que se jugo la partida
  * @param intentos Number: cantidad de intentos realizados
  * @param nro_partida Number: numero de la partida jugada
@@ -35,11 +36,11 @@ class Partida {
 }
 /** 
  * Partida con todas sus indicaciones correspondientes
- *
- * @param titulo String: Titulo que se le pondra a la card de la estadistica
- * @param valor Number: valor de la misma
- * @param array_aux array: un array auxiliar que sea necesario para cada estadistica (opcional) 
- */
+*
+* @param titulo String: Titulo que se le pondra a la card de la estadistica
+* @param valor Number: valor de la misma
+* @param array_aux array: un array auxiliar que sea necesario para cada estadistica (opcional) 
+*/
 class Estadistica {
   constructor(titulo, valor, array_aux = [])
   {
@@ -113,9 +114,26 @@ historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template", 'prepend' , `el numero en la posiscion ${cant_pistas+1} es ${respuesta[cant_pistas]} `)
     cant_pistas++
   }
-  else if (confirm("Si pedis esta ultima pista, vas a perder automaticamente"))
-    Rendirse()
-})
+  else
+  {
+
+    
+    Swal.fire({
+      title: "Si utilizas esta pista perderas automaticamente",
+      icon: "info",
+      showDenyButton: true,
+      confirmButtonText: "No rendirse",
+      denyButtonText: `Rendirse`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+      } else if (result.isDenied) {
+        Rendirse()
+      }
+    });
+
+  }
+  })
 
 //Listener Keypad
 intento.addEventListener("keypress", (e)=>{
@@ -205,14 +223,23 @@ function generarNumeroAleatorio(cantDigitos, repeticion, con_ceros) {
  * false: no es correcto
  */
 function esCorrecto() {
-  let comprobacion = verificacion(intento.value);
-  cant_intentos++;
-  historial.querySelector('h1').innerText = `CANTIDAD DE INTENTOS: ${cant_intentos}`
-
+  let comprobacion = verificacion(intento.value)
+  cant_intentos++
+  
   if (comprobacion == "99")
-    mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`)
+  {
+    cant_intentos--
+    Toastify({
+      text: `${intento.value} no es un numero valido`,
+      className: "info",
+      style: {
+        background: "red",
+      }
+    }).showToast();
+  }
+  //mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`)
   else if (comprobacion[0] == 0 && comprobacion[1] == 0)
-    mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, todos los numeros son incorrectos`)
+  mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, todos los numeros son incorrectos`)
   else if (comprobacion[0] == cant_numeros) {
     
     almacenarPartida(false)
@@ -221,6 +248,7 @@ function esCorrecto() {
   else {
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
   }
+  historial.querySelector('h1').innerText = `CANTIDAD DE INTENTOS: ${cant_intentos}`
   intento.value = "";
 }
 
