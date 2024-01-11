@@ -35,8 +35,8 @@
                 <div class="h-100 border border-dark border-3 rounded-5 p-4 pt-1 bg-secondary">
                     <div class="pad-numerico-display h-20 row align-items-center">
                         <div class="input-group h-50">
-                            <input type="text" class="form-control pad-numerico-display-input-numero fs-3" placeholder="Ingrese su numero" aria-label="Username" aria-describedby="basic-addon1">
-                          </div>
+                            <input type="text" class="form-control pad-numerico-display-input-numero fs-3" aria-label="Username" aria-describedby="basic-addon1" maxlength="9">
+                        </div>
                     </div>
                     <div class="row justify-content-around h-20">
                         <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">1</button></div>
@@ -61,9 +61,9 @@
             </div>
             <div class="historial col-8">
                 <h1>CANTIDAD DE INTENTOS: 0</h1>
-                <div style="height: 80%;" class="historial-div">
+                <div style="height: 80%;" class="historial-div  d-flex align-items-center flex-column">
                     <template class="historial-template w-100">
-                        <div style="height: 5vh;" class="div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center">
+                        <div style="height: 10vh;" class="div-template border border-dark border-3 rounded-3 d-flex justify-content-center align-items-center">
                             <p class="m-0"></p>
                         </div>
                     </template>
@@ -74,7 +74,7 @@
         <section class="partidas d-flex flex-column">
 
             <div class="d-flex justify-content-around m-4">
-                <div class="col-3"><button class="borrar-historial-boton w-100 btn btn-primary fs-2 rounded-5">BORRAR HISTORIAL</button></div>
+                <div class="col-3"><button class="borrar-historial-boton w-100 btn btn-primary rounded-5">BORRAR HISTORIAL</button></div>
                 <div class="col-3"><button class="rendirse-boton w-100 btn btn-primary fs-2 rounded-5">RENDIRSE</button></div>
                 <div class="col-3"><button class="pista-boton w-100 btn btn-primary fs-2 rounded-5">PISTA</button></div>
             </div>

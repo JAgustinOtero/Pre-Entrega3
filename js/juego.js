@@ -6,10 +6,12 @@ let header_botonera = header.querySelector(".header-botonera")
 let main = document.querySelector("main")
 let intento = main.querySelector(".pad-numerico-display-input-numero")
 let historial = main.querySelector(".historial")
+let div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
 
 let historial_partidas = main.querySelector(".partidas")
 let borrar_historial_boton = historial_partidas.querySelector(".borrar-historial-boton")
 let info = historial_partidas.querySelector(".info")
+
 
 
 
@@ -104,34 +106,37 @@ historial_partidas.querySelector(".borrar-historial-boton").addEventListener("cl
 
 //Listener Boton Rendirse
 historial_partidas.querySelector(".rendirse-boton").addEventListener("click", ()=>{
-  confirm("Estas Seguro que deseas Rendirte?")? Rendirse() : false
+  Swal.fire({
+    title: "Estas seguro que quieres rendirte?",
+    icon: "warning",
+    showDenyButton: true,
+    confirmButtonText: "No rendirse",
+    confirmButtonColor: "#228B22",
+    denyButtonText: `Rendirse`,
+    denyButtonColor: "#d33"
+  }).then((result) => {
+    result.isDenied && Rendirse()
+    
+  })
 })
 
 //Listener Boton Pista
 historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
-  if(cant_pistas < cant_numeros - 1)
-  {
+  if(cant_pistas++ < cant_numeros - 1)
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template", 'prepend' , `el numero en la posiscion ${cant_pistas+1} es ${respuesta[cant_pistas]} `)
-    cant_pistas++
-  }
   else
   {
-
-    
     Swal.fire({
       title: "Si utilizas esta pista perderas automaticamente",
-      icon: "info",
+      icon: "warning",
       showDenyButton: true,
       confirmButtonText: "No rendirse",
-      denyButtonText: `Rendirse`
+      confirmButtonColor: "#228B22",
+      denyButtonText: `Rendirse`,
+      denyButtonColor: "#d33"
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-      } else if (result.isDenied) {
-        Rendirse()
-      }
-    });
-
+      result.isDenied && Rendirse()
+    })
   }
   })
 
@@ -223,6 +228,10 @@ function generarNumeroAleatorio(cantDigitos, repeticion, con_ceros) {
  * false: no es correcto
  */
 function esCorrecto() {
+  let div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+  let fontSize = 1.5
+  let height = 15
+
   let comprobacion = verificacion(intento.value)
   cant_intentos++
   
@@ -233,23 +242,47 @@ function esCorrecto() {
       text: `${intento.value} no es un numero valido`,
       className: "info",
       style: {
-        background: "red",
+        background: "radial-gradient(circle, rgba(238,14,14,1) 64%, rgba(171,30,16,1) 96%)"
       }
     }).showToast();
   }
   //mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`)
   else if (comprobacion[0] == 0 && comprobacion[1] == 0)
-  mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, todos los numeros son incorrectos`)
+  {
+    mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}: todos los numeros son incorrectos`)
+    div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+    div_historial[0].style.backgroundColor = "red"
+    div_historial[0].style.fontSize = "1.5rem"
+      div_historial[0].style.height = "10vh"
+      div_historial[0].style.width = "100%"
+  }
+
   else if (comprobacion[0] == cant_numeros) {
     
     almacenarPartida(false)
     reset()
   }
   else {
-    mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}, hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
+    mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}: hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
+    if(comprobacion[0] || comprobacion[1])
+    {
+      console.log(historial.querySelector(".historial-div").querySelectorAll("div")[0])
+      div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+      div_historial[0].style.backgroundColor = "yellow"
+      div_historial[0].style.color = "black"
+      div_historial[0].style.fontSize = "1.2rem"
+      div_historial[0].style.height = "10vh"
+      div_historial[0].style.width = "100%"
+    }
   }
   historial.querySelector('h1').innerText = `CANTIDAD DE INTENTOS: ${cant_intentos}`
-  intento.value = "";
+  intento.value = ""
+  if(cant_intentos > 1)
+  {
+    div_historial[1].style.fontSize = "1rem"
+    div_historial[1].style.height = "5vh"
+    div_historial[1].style.width = "90%"
+  }
 }
 
 /** 
@@ -294,7 +327,9 @@ function setCantNumber(numero) {
   historial.querySelector('h1').style.display = "block"
   historial.querySelector('h1').innerText = "CANTIDAD DE INTENTOS: 0"
 
-  intento.disabled = false 
+  intento.disabled = false
+  intento.maxLength = cant_numeros
+  intento.placeholder = `ej: ${Math.floor(0.123456789 * Math.pow(10, cant_numeros))}`
   enfoqueDisplay();
 
 }
