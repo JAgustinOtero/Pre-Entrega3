@@ -61,6 +61,7 @@ let respuesta = 0;
 let nro_partida = (Number(localStorage.getItem("nro_partida")) || 1)
 let partidas = []
 let cant_pistas = 0
+let intento_anterior = 0
 
 
 
@@ -114,16 +115,32 @@ historial_partidas.querySelector(".rendirse-boton").addEventListener("click", ()
     confirmButtonColor: "#228B22",
     denyButtonText: `Rendirse`,
     denyButtonColor: "#d33"
-  }).then((result) => {
-    result.isDenied && Rendirse()
-    
-  })
+  }).then((result) => {result.isDenied && Rendirse()})
 })
 
 //Listener Boton Pista
 historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
+  let muestra = []
+
   if(cant_pistas++ < cant_numeros - 1)
-    mostrarDiv(historial.querySelector(".historial-div") ,"historial-template", 'prepend' , `el numero en la posiscion ${cant_pistas+1} es ${respuesta[cant_pistas]} `)
+  {
+    Swal.fire({
+      title: `el numero en la posiscion ${cant_pistas} es ${respuesta[cant_pistas-1]} `,
+      icon: "info",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#228B22",
+    }).then(()=>{
+      enfoqueDisplay()
+    })
+
+    for(let i = 0; i < cant_numeros; i++)
+    {
+      muestra += cant_pistas > i? `${respuesta[i]} `: `_ `
+      
+    }
+    historial.querySelectorAll('h1')[1].innerText = muestra
+  }
+    //mostrarDiv(historial.querySelector(".historial-div") ,"historial-template", 'prepend' , `el numero en la posiscion ${cant_pistas} es ${respuesta[cant_pistas-1]} `)
   else
   {
     Swal.fire({
@@ -134,16 +151,27 @@ historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
       confirmButtonColor: "#228B22",
       denyButtonText: `Rendirse`,
       denyButtonColor: "#d33"
-    }).then((result) => {
-      result.isDenied && Rendirse()
-    })
+    }).then((result) => {result.isDenied && Rendirse()})
   }
+  
   })
 
 //Listener Keypad
 intento.addEventListener("keypress", (e)=>{
+  
   e.key == "Enter" && esCorrecto()
+  console.log(e.keyCode)
+  e.keyCode == 38 && e.preventDefault()
 });
+
+document.onkeydown = (e)=>{
+  if(e.keyCode == 38)
+  {
+    e.preventDefault()
+    intento.value = cant_intentos != 0 ? intento_anterior: intento.value
+
+  } 
+}
 
 
 
@@ -229,10 +257,9 @@ function generarNumeroAleatorio(cantDigitos, repeticion, con_ceros) {
  */
 function esCorrecto() {
   let div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
-  let fontSize = 1.5
-  let height = 15
-
   let comprobacion = verificacion(intento.value)
+
+  intento_anterior = intento.value
   cant_intentos++
   
   if (comprobacion == "99")
@@ -252,9 +279,7 @@ function esCorrecto() {
     mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}: todos los numeros son incorrectos`)
     div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
     div_historial[0].style.backgroundColor = "red"
-    div_historial[0].style.fontSize = "1.5rem"
-      div_historial[0].style.height = "10vh"
-      div_historial[0].style.width = "100%"
+    
   }
 
   else if (comprobacion[0] == cant_numeros) {
@@ -264,19 +289,19 @@ function esCorrecto() {
   }
   else {
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}: hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
-    if(comprobacion[0] || comprobacion[1])
-    {
-      console.log(historial.querySelector(".historial-div").querySelectorAll("div")[0])
-      div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
-      div_historial[0].style.backgroundColor = "yellow"
-      div_historial[0].style.color = "black"
-      div_historial[0].style.fontSize = "1.2rem"
-      div_historial[0].style.height = "10vh"
-      div_historial[0].style.width = "100%"
-    }
+    console.log(historial.querySelector(".historial-div").querySelectorAll("div")[0])
+    div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+    
+    comprobacion[1] && (div_historial[0].style.backgroundColor = "yellow")
+    comprobacion[0] >= Math.floor(2 * cant_numeros / 3) && (div_historial[0].style.backgroundColor = "#6bd316")
+    comprobacion[0] >= Math.floor(cant_numeros / 3) && (div_historial[0].style.backgroundColor = "yellowgreen")
+    
+    div_historial[0].style.color = "black"
+    div_historial[0].style.fontSize = "1.2rem"
   }
   historial.querySelector('h1').innerText = `CANTIDAD DE INTENTOS: ${cant_intentos}`
   intento.value = ""
+
   if(cant_intentos > 1)
   {
     div_historial[1].style.fontSize = "1rem"
@@ -318,7 +343,10 @@ function verificacion(numero) {
  * @param numero number: numero ingresado por la botonera
  */
 function setCantNumber(numero) {
+  let muestra = ""
+  
   cant_numeros = numero;
+
   header.querySelector("h1").innerText = `  Ha elegido jugar con ${cant_numeros} numeros, coloque su intento sin repetir numeros`; //modifico el header y oculto los botones
   header_botonera.style.display = "none"
   historial_partidas.querySelector(".rendirse-boton").style.display = "block"
@@ -326,6 +354,13 @@ function setCantNumber(numero) {
   main.style.display = "flex"; //muestro el pad-numerico
   historial.querySelector('h1').style.display = "block"
   historial.querySelector('h1').innerText = "CANTIDAD DE INTENTOS: 0"
+  historial.querySelectorAll('h1')[1].style.display = "block"
+  for(let i = 0 ; i < cant_numeros ; i++)
+  {
+    muestra += '_ '
+  }
+  historial.querySelectorAll('h1')[1].innerText = muestra
+  
 
   intento.disabled = false
   intento.maxLength = cant_numeros
@@ -411,6 +446,7 @@ function reset()
   historial_partidas.querySelector(".rendirse-boton").style.display = "none"
   historial_partidas.querySelector(".pista-boton").style.display = "none"
   historial.querySelector('h1').style.display = "none"
+  historial.querySelectorAll('h1')[1].style.display = "none"
   intento.disabled = true
 
   nro_partida <= 1? borrar_historial_boton.style.display = "none" : borrar_historial_boton.style.display = "block"
