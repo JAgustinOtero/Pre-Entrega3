@@ -1,0 +1,7 @@
+[
+    {"backgroundColor": "backgroundColor,red", "color": "color,white", "fontSize": "fontSize,1.5rem"},
+    {"backgroundColor": "backgroundColor,yellow", "color": "color,black", "fontSize": "fontSize,1.2rem"},
+    {"backgroundColor": "backgroundColor,yellowgreen", "color": "color,black", "fontSize": "fontSize,1.2rem"},
+    {"backgroundColor": "backgroundColor,#6bd316", "color": "color,black", "fontSize": "fontSize,1.2rem"}
+    
+]

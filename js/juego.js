@@ -6,7 +6,7 @@ let header_botonera = header.querySelector(".header-botonera")
 let main = document.querySelector("main")
 let intento = main.querySelector(".pad-numerico-display-input-numero")
 let historial = main.querySelector(".historial")
-let div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+let div_historial
 
 let historial_partidas = main.querySelector(".partidas")
 let borrar_historial_boton = historial_partidas.querySelector(".borrar-historial-boton")
@@ -67,6 +67,7 @@ let intento_anterior = 0
 
 /*************************************************************************MAIN*******************************************************************/
 reset()
+
 
 
 
@@ -256,14 +257,10 @@ function generarNumeroAleatorio(cantDigitos, repeticion, con_ceros) {
  * false: no es correcto
  */
 function esCorrecto() {
-  let div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+  
   let comprobacion = verificacion(intento.value)
 
-  intento_anterior = intento.value
-  cant_intentos++
-  
-  if (comprobacion == "99")
-  {
+  if (comprobacion == "99"){
     cant_intentos--
     Toastify({
       text: `${intento.value} no es un numero valido`,
@@ -273,41 +270,20 @@ function esCorrecto() {
       }
     }).showToast();
   }
-  //mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}, la cantidad de numeros es incorrecta o sus numero se repiten, por favor, ingrese un numero valido`)
-  else if (comprobacion[0] == 0 && comprobacion[1] == 0)
-  {
+  else if (comprobacion[0] == 0 && comprobacion[1] == 0){
     mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}: todos los numeros son incorrectos`)
-    div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
-    div_historial[0].style.backgroundColor = "red"
-    
+    aplicarEstilos(0)
   }
-
-  else if (comprobacion[0] == cant_numeros) {
-    
+  else if (comprobacion[0] == cant_numeros) { 
     almacenarPartida(false)
     reset()
   }
   else {
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}: hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
-    console.log(historial.querySelector(".historial-div").querySelectorAll("div")[0])
-    div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
-    
-    comprobacion[1] && (div_historial[0].style.backgroundColor = "yellow")
-    comprobacion[0] >= Math.floor(2 * cant_numeros / 3) && (div_historial[0].style.backgroundColor = "#6bd316")
-    comprobacion[0] >= Math.floor(cant_numeros / 3) && (div_historial[0].style.backgroundColor = "yellowgreen")
-    
-    div_historial[0].style.color = "black"
-    div_historial[0].style.fontSize = "1.2rem"
+    aplicarEstilos(Math.floor(comprobacion[0] / cant_numeros * 3)+1)
   }
-  historial.querySelector('h1').innerText = `CANTIDAD DE INTENTOS: ${cant_intentos}`
-  intento.value = ""
-
-  if(cant_intentos > 1)
-  {
-    div_historial[1].style.fontSize = "1rem"
-    div_historial[1].style.height = "5vh"
-    div_historial[1].style.width = "90%"
-  }
+  
+  resetIntento()
 }
 
 /** 
@@ -454,6 +430,20 @@ function reset()
   borrarElementos(historial.querySelector(".historial-div"), "div", 1)
 }
 
+function resetIntento()
+{
+  intento_anterior = intento.value
+  cant_intentos++
+  historial.querySelector('h1').innerText = `CANTIDAD DE INTENTOS: ${cant_intentos}`
+  intento.value = ""
+  if(cant_intentos > 1)
+  {
+    div_historial[1].style.fontSize = "1rem"
+    div_historial[1].style.height = "5vh"
+    div_historial[1].style.width = "90%"
+  }
+}
+
 /** 
  * Limpia y vuelve a completar el historial de partidas y estadisticas
  */
@@ -498,6 +488,20 @@ function mostrarDiv(nodo, templatename, modo, textop, h1 = false, textoh1 = '')
   h1 && ( template.querySelector('h1').innerText = textoh1 )
   modo == 'append' && nodo.append(template)
   modo == 'prepend' && nodo.prepend(template)
+}
+
+function modificarDiv(data, caso)
+{
+  div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+  Object.keys(data[caso]).forEach((elm)=> div_historial[0].style[data[caso][elm].split(",")[0]] = data[caso][elm].split(",")[1] )
+}
+
+function aplicarEstilos(caso){
+  fetch("estilos.json")
+  .then(response => response.json())
+  .then(data => {
+    modificarDiv(data,caso)
+  })
 }
 
 /** 
@@ -560,7 +564,6 @@ function Rendirse()
   almacenarPartida(true)
   reset()
 }
-
 
 /** 
  * almacena los datos de la partida en el localStorage
