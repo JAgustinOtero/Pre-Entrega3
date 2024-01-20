@@ -1,4 +1,7 @@
-// import Swal from '../sweetalert2/dist/sweetalert2.js'
+
+
+import Toastify from "toastify-js"
+
 /*************************************************************************DOM*******************************************************************/
 let header = document.querySelector("header")
 let header_botonera = header.querySelector(".header-botonera")

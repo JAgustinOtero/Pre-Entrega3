@@ -1,0 +1,39 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+
+body
+{
+    height: auto;
+    width: 100%;
+}
+
+header
+{
+    height: 25vh;
+}
+
+.h-20
+{
+    height: 19%;
+}
+ 
+main
+{
+    height: fit-content;
+}
+
+.pad-numerico
+{
+    height: 60vh;
+    padding: 5vh;
+}
+
+.div-template
+{
+    /*font-size: 1.5rem;*/
+    height: 10vh;
+    width: 100%;
+}
+
+
