@@ -161,7 +161,6 @@ historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
 intento.addEventListener("keypress", (e)=>{
   
   e.key == "Enter" && esCorrecto()
-  console.log(e.keyCode)
   e.keyCode == 38 && e.preventDefault()
 });
 
@@ -260,6 +259,7 @@ function esCorrecto() {
   
   let comprobacion = verificacion(intento.value)
 
+  
   if (comprobacion == "99"){
     cant_intentos--
     Toastify({
@@ -284,6 +284,7 @@ function esCorrecto() {
   }
   
   resetIntento()
+
 }
 
 /** 
@@ -438,6 +439,7 @@ function resetIntento()
   intento.value = ""
   if(cant_intentos > 1)
   {
+    div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
     div_historial[1].style.fontSize = "1rem"
     div_historial[1].style.height = "5vh"
     div_historial[1].style.width = "90%"
@@ -494,6 +496,7 @@ function modificarDiv(data, caso)
 {
   div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
   Object.keys(data[caso]).forEach((elm)=> div_historial[0].style[data[caso][elm].split(",")[0]] = data[caso][elm].split(",")[1] )
+  
 }
 
 function aplicarEstilos(caso){
@@ -544,7 +547,8 @@ function mostrarEstadisticas(estadisticas)
   const record = 0
   const mayor_num = 1
 
-  estadisticas[record].valor = estadisticas[record].array_aux.sort()[0] == 9999999999? 0: estadisticas[record].array_aux[0]
+  console.log(estadisticas[record].array_aux.sort((a,b) => {return a-b}).find((element) => element != false))
+  estadisticas[record].valor = estadisticas[record].array_aux.sort((a,b) => {return a-b}).find((element)=> element != false) || 0
   estadisticas[mayor_num].valor = estadisticas[mayor_num].array_aux.sort()[estadisticas[mayor_num].array_aux.length-1]
   
   borrarElementos(info, ".info-div", 1)
@@ -616,7 +620,7 @@ function evaluarPartidas(partidas){
     const TEXTO_DERRORTA = `partida Nro ${partidas[i].nro_partida}: Jugaste con ${partidas[i].cant_numeros} numeros y luego de ${partidas[i].intentos} ${partidas[i].intentos == 1 ? "intento": "intentos"} te rendiste aun habiendo utilizado ${partidas[i].pistas} ${partidas[i].pistas == 1 ? "pista": "pistas"} `
     const TEXTO_VICTORIA = `partida Nro ${partidas[i].nro_partida}: Jugaste con ${partidas[i].cant_numeros} numeros, te tomo ${partidas[i].intentos} ${partidas[i].intentos == 1 ? "intento": "intentos"} y utilizaste ${partidas[i].pistas} ${partidas[i].pistas == 1 ? "pista": "pistas"}`
     mostrarDiv(historial_partidas.querySelector(".partidas-historial") ,"partidas-template",'append', partidas[i].rendicion? TEXTO_DERRORTA : TEXTO_VICTORIA )
-    modificarEstadisticas( estadisticas, partidas[i].rendicion? 'derrota': 'victoria',i, partidas[i].rendicion == false && partidas[i].intentos, partidas[i].rendicion == false ? partidas[i].cant_numeros : 0 )
+    modificarEstadisticas( estadisticas, partidas[i].rendicion? 'derrota': 'victoria',i, partidas[i].rendicion == false && Number(partidas[i].intentos), partidas[i].rendicion == false ? partidas[i].cant_numeros : 0 )
   }
   mostrarEstadisticas(estadisticas)
 }
