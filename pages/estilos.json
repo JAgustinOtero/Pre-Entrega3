@@ -1,10 +1,10 @@
 [
-    {"backgroundColor": "backgroundColor,red", "color": "color,white", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,yellow", "color": "color,black", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,yellowgreen", "color": "color,black", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,#6bd316", "color": "color,black", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,#7D0A0A", "color": "color,white", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,#F8DE22", "color": "color,black", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,#81B214", "color": "color,black", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,#54B435", "color": "color,black", "fontSize": "fontSize,1.5rem"}
+    {"backgroundColor": "backgroundColor;red", "color": "color;white", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;yellow", "color": "color;black", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;yellowgreen", "color": "color;black", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;rgb(107, 211, 22)", "color": "color;black", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;rgb(125, 10, 10)", "color": "color;white", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;rgb(248, 222, 34)", "color": "color;black", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;rgb(129, 178, 20)", "color": "color;black", "fontSize": "fontSize;1.5rem"},
+    {"backgroundColor": "backgroundColor;rgb(84, 180, 53)", "color": "color;black", "fontSize": "fontSize;1.5rem"}
 ]

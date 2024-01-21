@@ -111,15 +111,69 @@ historial_partidas.querySelector(".borrar-historial-boton").addEventListener("cl
 
 //Listener Boton Rendirse
 historial_partidas.querySelector(".rendirse-boton").addEventListener("click", ()=>{
-  Swal.fire({
-    title: "Estas seguro que quieres rendirte?",
-    icon: "warning",
-    showDenyButton: true,
-    confirmButtonText: "No rendirse",
-    confirmButtonColor: "#228B22",
-    denyButtonText: `Rendirse`,
-    denyButtonColor: "#d33"
-  }).then((result) => {result.isDenied && Rendirse()})
+
+  if (modo == "dark"){
+    Swal.fire({
+      title: "Estas seguro que quieres rendirte?",
+      icon: "warning",
+      iconColor: "white",
+      background: "#0B2447",
+      color: "white",
+      showDenyButton: true,
+      confirmButtonText: "No rendirse",
+      confirmButtonColor: "#4E9F3D",
+      denyButtonText: `Rendirse`,
+      denyButtonColor: "#950101",
+      backdrop: "rgba(123,0,0,0.4)",
+      inputAutoFocus :false,
+      showClass: {
+        popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `
+      }
+    }).then((result) => {result.isDenied && Rendirse()})
+  }
+  else{
+    Swal.fire({
+      title: "Estas seguro que quieres rendirte?",
+      icon: "warning",
+      iconColor: "black",
+      background: "#D0E8F2",
+      color: "black",
+      showDenyButton: true,
+      confirmButtonText: "No rendirse",
+      confirmButtonColor: "#228B22",
+      denyButtonText: `Rendirse`,
+      denyButtonColor: "#d33",
+      backdrop: "rgba(123,0,0,0.4)",
+      inputAutoFocus :false,
+      showClass: {
+        popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `
+      }
+    }).then((result) => {result.isDenied && Rendirse()})
+  }
+
+  
 })
 
 //Listener Boton Pista
@@ -128,14 +182,66 @@ historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
 
   if(cant_pistas++ < cant_numeros - 1)
   {
-    Swal.fire({
-      title: `el numero en la posiscion ${cant_pistas} es ${respuesta[cant_pistas-1]} `,
-      icon: "info",
-      confirmButtonText: "OK",
-      confirmButtonColor: "#228B22",
-    }).then(()=>{
-      enfoqueDisplay()
-    })
+    if (modo == "dark"){
+      Swal.fire({
+        title: `el numero en la posiscion ${cant_pistas} es ${respuesta[cant_pistas-1]} `,
+        icon: "info",
+        iconColor: "white",
+        background: "#0B2447",
+        color: "white",
+        confirmButtonText: "OK",
+      confirmButtonColor: "#4E9F3D",
+        backdrop: "rgba(0,0,123,0.4)",
+        inputAutoFocus :false,
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      }).then(()=>{
+        enfoqueDisplay()
+      })
+    }
+    else{
+      Swal.fire({
+        title: `el numero en la posiscion ${cant_pistas} es ${respuesta[cant_pistas-1]} `,
+        icon: "info",
+        iconColor: "black",
+        background: "#D0E8F2",
+        color: "black",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#228B22",
+        backdrop: "rgba(0,0,123,0.4)",
+        inputAutoFocus :false,
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      }).then(()=>{
+        enfoqueDisplay()
+      })
+    }
+
+
 
     for(let i = 0; i < cant_numeros; i++)
     {
@@ -147,15 +253,66 @@ historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
     //mostrarDiv(historial.querySelector(".historial-div") ,"historial-template", 'prepend' , `el numero en la posiscion ${cant_pistas} es ${respuesta[cant_pistas-1]} `)
   else
   {
-    Swal.fire({
-      title: "Si utilizas esta pista perderas automaticamente",
-      icon: "warning",
-      showDenyButton: true,
-      confirmButtonText: "No rendirse",
-      confirmButtonColor: "#228B22",
-      denyButtonText: `Rendirse`,
-      denyButtonColor: "#d33"
-    }).then((result) => {result.isDenied && Rendirse()})
+    if (modo == "dark"){
+      Swal.fire({
+        title: "Si utilizas esta pista perderas automaticamente",
+        icon: "warning",
+        iconColor: "white",
+        background: "#0B2447",
+        color: "white",
+        showDenyButton: true,
+        confirmButtonText: "No rendirse",
+        confirmButtonColor: "#4E9F3D",
+        denyButtonText: `Rendirse`,
+        denyButtonColor: "#950101",
+        backdrop: "rgba(123,0,0,0.4)",
+        inputAutoFocus :false,
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      }).then((result) => {result.isDenied && Rendirse()})
+    }
+    else{
+      Swal.fire({
+        title: "Si utilizas esta pista perderas automaticamente",
+        icon: "warning",
+        iconColor: "black",
+        background: "#D0E8F2",
+        color: "black",
+        showDenyButton: true,
+        confirmButtonText: "No rendirse",
+        confirmButtonColor: "#228B22",
+        denyButtonText: `Rendirse`,
+        denyButtonColor: "#d33",
+        backdrop: "rgba(123,0,0,0.4)",
+        inputAutoFocus :false,
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      }).then((result) => {result.isDenied && Rendirse()})
+    }
   }
   
   })
@@ -498,7 +655,7 @@ function mostrarDiv(nodo, templatename, modo, textop, h1 = false, textoh1 = '')
 function modificarDiv(data, caso)
 {
   div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
-  Object.keys(data[caso]).forEach((elm)=> div_historial[0].style[data[caso][elm].split(",")[0]] = data[caso][elm].split(",")[1] )
+  Object.keys(data[caso]).forEach((elm)=> div_historial[0].style[data[caso][elm].split(";")[0]] = data[caso][elm].split(";")[1] )
   
 }
 
@@ -506,7 +663,6 @@ function aplicarEstilos(caso){
   fetch("estilos.json")
   .then(response => response.json())
   .then(data => {
-    console.log(caso)
     modificarDiv(data,caso)
   })
 }
@@ -630,30 +786,36 @@ function evaluarPartidas(partidas){
 
 function cambiarModo()
 {
+  let const_modo = Number(modo == "dark" ? 4:0)
   if(cant_numeros != 0)
   {
-    Swal.fire({
-      title: "Si cambias de modo, perderas el progreso de la partida actual",
-      icon: "warning",
-      showDenyButton: true,
-      confirmButtonText: "Permanecer",
-      confirmButtonColor: "#228B22",
-      denyButtonText: `Abandonar la partida`,
-      denyButtonColor: "#d33"
-    }).then((result) => {
-      if (result.isDenied)
-      {
-        if(modo == "light")
-        modo = "dark"
-        else
-          modo = "light"
-    
-        localStorage.setItem("modo", modo)
-        setModo()
-        location.reload();
-      }
-    })
-  }
+
+    if(cant_intentos > 0)
+    {
+      fetch("estilos.json")
+      .then(response => response.json())
+      .then(data => {
+        div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
+        div_historial.forEach((elm =>{
+          for (let i = 0 + const_modo; i <= 3 + const_modo; i++)
+          {
+            //console.log(elm.style.backgroundColor, data[i].backgroundColor.split(";")[1])
+            if(elm.style.backgroundColor == data[i].backgroundColor.split(";")[1])
+            {
+              if(i >= 4) elm.style.backgroundColor = data[i-4].backgroundColor.split(";")[1]
+              else elm.style.backgroundColor = data[i+4].backgroundColor.split(";")[1]
+            }
+          }
+        }))
+      })  
+    }
+    if(modo == "light") modo = "dark"
+    else modo = "light"
+  
+    localStorage.setItem("modo", modo)
+    setModo() 
+    }
+
   else{
     if(modo == "light")
         modo = "dark"
@@ -682,8 +844,5 @@ function setModo()
       document.body.classList.remove("bg-color-light")
       modo = "dark"
       header.querySelector("button").innerText = "Light mode"
-    }
-    
-
-    
+    } 
 }
