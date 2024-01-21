@@ -55,8 +55,8 @@ class Estadistica {
 /*************************************************************************VARIABLES*******************************************************************/
 let cant_numeros = 0;
 let cant_intentos = 0;
-let respuesta = 0;
 let nro_partida = (Number(localStorage.getItem("nro_partida")) || 1)
+let respuesta = 0;
 let partidas = []
 let cant_pistas = 0
 let intento_anterior = 0
@@ -420,7 +420,6 @@ function generarNumeroAleatorio(cantDigitos, repeticion, con_ceros) {
 function esCorrecto() {
   
   let comprobacion = verificacion(intento.value)
-
   
   if (comprobacion == "99"){
     cant_intentos--
@@ -437,8 +436,10 @@ function esCorrecto() {
     aplicarEstilos(0 + Number(modo == "dark" && 4))
   }
   else if (comprobacion[0] == cant_numeros) { 
+    cant_intentos++
     almacenarPartida(false)
     reset()
+    cant_intentos--
   }
   else {
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}: hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
@@ -564,13 +565,16 @@ function reset()
 
   mostrarPartidas()
 
-  header.querySelector("h1").innerText = localStorage.getItem(`partida${nro_partida-1}`) != null?
-  (partida.rendicion ?
-  `Que lastima perdiste!!! no adivinaste el numero ni en ${partida.intentos} ${partida.intentos == 1 ? "intento": "intentos"}
-  ` + TEXTO_INICIO
-  : `Felicidades Ganaste!!! y lo adivinaste en solo ${partida.intentos} ${partida.intentos == 1 ? "intento": "intentos"}
-  ` + TEXTO_INICIO)
-  : (TEXTO_INICIO)
+  if(respuesta != 0)
+  {
+    header.querySelector("h1").innerText = localStorage.getItem(`partida${nro_partida-1}`) != null?
+    (partida.rendicion ?
+    `Que lastima perdiste!!! el numero era ${respuesta}, no adivinaste el numero ni en ${partida.intentos} ${partida.intentos == 1 ? "intento": "intentos"}
+    ` + TEXTO_INICIO
+    : `Felicidades Ganaste!!! el numero era ${respuesta}, y lo adivinaste en solo ${partida.intentos} ${partida.intentos == 1 ? "intento": "intentos"}
+    ` + TEXTO_INICIO)
+    : (TEXTO_INICIO)
+  }
   
   
   // reinicio las variables
