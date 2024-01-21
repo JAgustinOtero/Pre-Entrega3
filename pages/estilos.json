@@ -2,6 +2,9 @@
     {"backgroundColor": "backgroundColor,red", "color": "color,white", "fontSize": "fontSize,1.5rem"},
     {"backgroundColor": "backgroundColor,yellow", "color": "color,black", "fontSize": "fontSize,1.5rem"},
     {"backgroundColor": "backgroundColor,yellowgreen", "color": "color,black", "fontSize": "fontSize,1.5rem"},
-    {"backgroundColor": "backgroundColor,#6bd316", "color": "color,black", "fontSize": "fontSize,1.5rem"}
-    
+    {"backgroundColor": "backgroundColor,#6bd316", "color": "color,black", "fontSize": "fontSize,1.5rem"},
+    {"backgroundColor": "backgroundColor,#7D0A0A", "color": "color,white", "fontSize": "fontSize,1.5rem"},
+    {"backgroundColor": "backgroundColor,#F8DE22", "color": "color,black", "fontSize": "fontSize,1.5rem"},
+    {"backgroundColor": "backgroundColor,#81B214", "color": "color,black", "fontSize": "fontSize,1.5rem"},
+    {"backgroundColor": "backgroundColor,#54B435", "color": "color,black", "fontSize": "fontSize,1.5rem"}
 ]

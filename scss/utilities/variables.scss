@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@300&display=swap');
+@font-face{
+    font-family:'digital-clock-font';
+    src: url('../../assets/fonts/digital-7.regular.ttf');
+   }
+
+
+$bg-color-dark: #051122;
+$bg-color-dark-divs: #19376D;
+$bg-color-dark-buttons: #0B2447;
+$bg-color-dark-buttons-border: #A5D7E8;
+$bg-color-dark-buttons-hover: #576CBC;
+
+$input-font: "digital-clock-font";
+$general-font:'Titillium Web', sans-serif;
+
+$bg-color-light: #FCF8EC;
+$bg-color-light-divs: #92C7CF;
+$bg-color-light-buttons: #D0E8F2;
+$bg-color-light-buttons-border: #79A3B1;
+$bg-color-light-buttons-hover: #AAD7D9;

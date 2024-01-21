@@ -1,11 +1,6 @@
-
-
-import Toastify from "toastify-js"
-
 /*************************************************************************DOM*******************************************************************/
 let header = document.querySelector("header")
 let header_botonera = header.querySelector(".header-botonera")
-
 let main = document.querySelector("main")
 let intento = main.querySelector(".pad-numerico-display-input-numero")
 let historial = main.querySelector(".historial")
@@ -65,11 +60,13 @@ let nro_partida = (Number(localStorage.getItem("nro_partida")) || 1)
 let partidas = []
 let cant_pistas = 0
 let intento_anterior = 0
+let modo = localStorage.getItem("modo")
 
 
 
 /*************************************************************************MAIN*******************************************************************/
 reset()
+setModo()
 
 
 
@@ -84,8 +81,11 @@ for (let i = 0; i < 9; i++) {
   });
   
   //Listeners Botones Header
+}
+for (let i = 1; i < 10; i++){
+
   header.getElementsByTagName("button")[i].addEventListener("click", () => {
-    setCantNumber(i + 1);
+    setCantNumber(i);
     respuesta = generarNumeroAleatorio(cant_numeros, false, false); //genero un numero random con la cantidad de numeros elegidos
     console.log(respuesta);
   });
@@ -159,6 +159,8 @@ historial_partidas.querySelector(".pista-boton").addEventListener("click", ()=>{
   }
   
   })
+
+  header.querySelector("button").addEventListener("click",cambiarModo)
 
 //Listener Keypad
 intento.addEventListener("keypress", (e)=>{
@@ -275,7 +277,7 @@ function esCorrecto() {
   }
   else if (comprobacion[0] == 0 && comprobacion[1] == 0){
     mostrarDiv(historial.querySelector(".historial-div"),"historial-template",'prepend',`${intento.value}: todos los numeros son incorrectos`)
-    aplicarEstilos(0)
+    aplicarEstilos(0 + Number(modo == "dark" && 4))
   }
   else if (comprobacion[0] == cant_numeros) { 
     almacenarPartida(false)
@@ -283,7 +285,7 @@ function esCorrecto() {
   }
   else {
     mostrarDiv(historial.querySelector(".historial-div") ,"historial-template",'prepend', `${intento.value}: hay ${comprobacion[0]} numeros correctos en su posicion y hay ${comprobacion[1]} numeros correctos que no estan en su posicion`)
-    aplicarEstilos(Math.floor(comprobacion[0] / cant_numeros * 3)+1)
+    aplicarEstilos(Math.floor(comprobacion[0] / cant_numeros * 3) + 1 + Number(modo == "dark" && 4))
   }
   
   resetIntento()
@@ -331,7 +333,6 @@ function setCantNumber(numero) {
   header_botonera.style.display = "none"
   historial_partidas.querySelector(".rendirse-boton").style.display = "block"
   historial_partidas.querySelector(".pista-boton").style.display = "block"
-  main.style.display = "flex"; //muestro el pad-numerico
   historial.querySelector('h1').style.display = "block"
   historial.querySelector('h1').innerText = "CANTIDAD DE INTENTOS: 0"
   historial.querySelectorAll('h1')[1].style.display = "block"
@@ -387,7 +388,6 @@ function esValido(numero) {
 
   if ((Math.floor(Number(numero)).toString().length - respuesta.length != 0) || seRepite(numero) || (numero >= Math.pow(10, cant_numeros)) || (numero[0] == 0)) {
     valido = false;
-    console.log(numero)
   }
   return valido;
 }
@@ -506,6 +506,7 @@ function aplicarEstilos(caso){
   fetch("estilos.json")
   .then(response => response.json())
   .then(data => {
+    console.log(caso)
     modificarDiv(data,caso)
   })
 }
@@ -550,7 +551,6 @@ function mostrarEstadisticas(estadisticas)
   const record = 0
   const mayor_num = 1
 
-  console.log(estadisticas[record].array_aux.sort((a,b) => {return a-b}).find((element) => element != false))
   estadisticas[record].valor = estadisticas[record].array_aux.sort((a,b) => {return a-b}).find((element)=> element != false) || 0
   estadisticas[mayor_num].valor = estadisticas[mayor_num].array_aux.sort()[estadisticas[mayor_num].array_aux.length-1]
   
@@ -616,7 +616,6 @@ function evaluarPartidas(partidas){
     new Estadistica("CANTIDAD DE PARTIDAS",0)
   ]
   
-  console.log(partidas)
 
   for(let i = 1; i < partidas.length; i++)
   {
@@ -626,4 +625,65 @@ function evaluarPartidas(partidas){
     modificarEstadisticas( estadisticas, partidas[i].rendicion? 'derrota': 'victoria',i, partidas[i].rendicion == false && Number(partidas[i].intentos), partidas[i].rendicion == false ? partidas[i].cant_numeros : 0 )
   }
   mostrarEstadisticas(estadisticas)
+}
+
+
+function cambiarModo()
+{
+  if(cant_numeros != 0)
+  {
+    Swal.fire({
+      title: "Si cambias de modo, perderas el progreso de la partida actual",
+      icon: "warning",
+      showDenyButton: true,
+      confirmButtonText: "Permanecer",
+      confirmButtonColor: "#228B22",
+      denyButtonText: `Abandonar la partida`,
+      denyButtonColor: "#d33"
+    }).then((result) => {
+      if (result.isDenied)
+      {
+        if(modo == "light")
+        modo = "dark"
+        else
+          modo = "light"
+    
+        localStorage.setItem("modo", modo)
+        setModo()
+        location.reload();
+      }
+    })
+  }
+  else{
+    if(modo == "light")
+        modo = "dark"
+    else
+      modo = "light"
+  
+    localStorage.setItem("modo", modo)
+    setModo()
+  }
+}
+
+
+function setModo()
+{
+  if( modo == "light")
+    {
+      if(document.body.classList.contains("bg-color-dark"))
+        document.body.classList.remove("bg-color-dark")
+      document.body.classList.add("bg-color-light")
+      modo = "light"
+      header.querySelector("button").innerText = "Dark mode"
+    }
+    else{
+      document.body.classList.add("bg-color-dark")
+      if(document.body.classList.contains("bg-color-light"))
+      document.body.classList.remove("bg-color-light")
+      modo = "dark"
+      header.querySelector("button").innerText = "Light mode"
+    }
+    
+
+    
 }

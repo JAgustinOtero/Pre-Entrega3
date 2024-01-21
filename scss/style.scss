@@ -1,6 +1,8 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
-
-
+@import "views/juego";
+@import "views/darkmode";
+@import "views/lightmode";
+@import "utilities/variables.scss";
 
 body
 {
@@ -15,25 +17,24 @@ header
 
 .h-20
 {
-    height: 19%;
+    height: 17%;
 }
  
 main
 {
     height: fit-content;
-}
-
-.pad-numerico
-{
-    height: 60vh;
-    padding: 5vh;
-}
-
-.div-template
-{
-    /*font-size: 1.5rem;*/
-    height: 10vh;
-    width: 100%;
+    .pad-numerico
+    {
+        height: 60vh;
+        padding: 5vh;
+    }
+    
+    .div-template
+    {
+        /*font-size: 1.5rem;*/
+        height: 10vh;
+        width: 100%;
+    }
 }
 
 

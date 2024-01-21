@@ -4,57 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de los Numeros</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/style.css">
     
     <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.min.css " rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     
 </head>
-<body class="d-flex flex-column bg-dark text-white">
-    <header>
-        <div style="height: auto;" >
-            <h1 class="text-center">
+<body class="d-flex flex-column">
+    <header style="height: auto;">
+        <div style="height: auto;" class="d-flex align-items-center justify-content-around" >
+            <h1 class="text-center col-10">
                 Elija la cantidad de numeros con la que va a jugar (del 1 al 9):
             </h1>
+                <button class="boton_modo btn btn-light fs-4 rounded-pill h-75"> Light mode </button>
         </div>
         <div class="header-botonera justify-content-around">
-            <button type="button" class="col-1 btn btn-primary fs-2">1</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">2</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">3</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">4</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">5</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">6</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">7</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">8</button>
-            <button type="button" class="col-1 btn btn-primary fs-2">9</button>
+            <button type="button" class="col-1 fs-2">1</button>
+            <button type="button" class="col-1 fs-2">2</button>
+            <button type="button" class="col-1 fs-2">3</button>
+            <button type="button" class="col-1 fs-2">4</button>
+            <button type="button" class="col-1 fs-2">5</button>
+            <button type="button" class="col-1 fs-2">6</button>
+            <button type="button" class="col-1 fs-2">7</button>
+            <button type="button" class="col-1 fs-2">8</button>
+            <button type="button" class="col-1 fs-2">9</button>
         </div>
     </header>
     <main class="flex-column">
         <section class="d-flex p-4"> 
-            <div class="p-4 pad-numerico">
-                <div class="h-100 border border-dark border-3 rounded-5 p-4 pt-1 bg-secondary">
-                    <div class="pad-numerico-display h-20 row align-items-center">
-                        <div class="input-group h-50">
-                            <input type="text" class="form-control pad-numerico-display-input-numero fs-3" aria-label="Username" aria-describedby="basic-addon1" maxlength="9">
+            <div style="height: auto;" class="p-4 col-3">
+                <div style="height: auto;" class="pad_numerico h-100 p-4 pt-1">
+                    <div class="pad_numerico_display h-25 row align-items-center">
+                        <div class="pad_numerico_display_input input-group">
+                            <input type="text" class="form-control pad-numerico-display-input-numero mt-2" aria-label="Username" aria-describedby="basic-addon1" maxlength="9">
                         </div>
                     </div>
-                    <div class="row justify-content-around h-20">
-                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">1</button></div>
-                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">2</button></div>
-                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">3</button></div>
+                    <div class="row justify-content-around h-20 mt-2">
+                        <div class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100 fs-1 ">1</button></div>
+                        <div class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100 fs-1 ">2</button></div>
+                        <div class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100 fs-1 ">3</button></div>
                     </div>
-                    <div class="row justify-content-around h-20">
-                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">4</button></div>
-                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">5</button></div>
-                        <div class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">6</button></div>
+                    <div class="row justify-content-around h-20 mt-2">
+                        <div class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100  fs-1">4</button></div>
+                        <div class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100  fs-1">5</button></div>
+                        <div class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100  fs-1">6</button></div>
                     </div>
-                    <div class="row justify-content-around h-20">
-                        <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">7</button></div>
-                        <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">8</button></div>
-                        <div  class="col-4 d-flex justify-content-center p-1"><button type="button" class="pad-numerico-row-boton w-100 btn btn-primary fs-1 rounded-5">9</button></div>
+                    <div class="row justify-content-around h-20 mt-2">
+                        <div  class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100 fs-1">7</button></div>
+                        <div  class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100 fs-1">8</button></div>
+                        <div  class="col-4 p-1"><button type="button" class="pad-numerico-row-boton w-100 fs-1">9</button></div>
                     </div>
-                    <div class="row h-20 col-12 d-flex justify-content-center mt-3">
-                        <div  class=" col-8 h-100"><button type="button" class="pad-numerico-submit-boton w-100 h-100 btn btn-primary rounded-5 fs-1">SUBMIT</button></div>
-                        <div  class=" col-4 h-100"><button type="button" class="pad-numerico-clean-boton w-100 h-100 btn btn-primary rounded-5 fs-1"> C </button></div>
+                    <div class="row h-20 justify-content-around mt-2">
+                        <div  class=" col-8 h-100 p-1"><button type="button" class="pad-numerico-submit-boton w-100 h-100 fs-1">SUBMIT</button></div>
+                        <div  class=" col-4 h-100 p-1"><button type="button" class="pad-numerico-clean-boton w-100 h-100 fs-1"> C </button></div>
                     </div>
                 </div>
             </div>
@@ -65,7 +67,7 @@
                 </div>
                 <div style="height: 80%;" class="historial-div  d-flex align-items-center flex-column">
                     <template class="historial-template w-100">
-                        <div style="height: 10vh;" class="div-template border border-dark border-3 rounded-3 d-flex justify-content-center align-items-center">
+                        <div style="height: 10vh;" class="div-template d-flex justify-content-center align-items-center">
                             <p class="m-0"></p>
                         </div>
                     </template>
@@ -75,29 +77,29 @@
 
         <section class="partidas d-flex flex-column">
 
-            <div class="d-flex justify-content-around m-4">
-                <div class="col-3"><button class="borrar-historial-boton w-100 btn fs-2 btn-primary rounded-5">BORRAR HISTORIAL</button></div>
-                <div class="col-3"><button class="rendirse-boton w-100 btn btn-primary fs-2 rounded-5">RENDIRSE</button></div>
-                <div class="col-3"><button class="pista-boton w-100 btn btn-primary fs-2 rounded-5">PISTA</button></div>
+            <div class="d-flex justify-content-around m-1">
+                <div class="col-3"><button class="borrar-historial-boton w-100 fs-2">BORRAR HISTORIAL</button></div>
+                <div class="col-3"><button class="rendirse-boton w-100 fs-2">RENDIRSE</button></div>
+                <div class="col-3"><button class="pista-boton w-100 fs-2">PISTA</button></div>
             </div>
 
             <div class="d-flex flex-column justify-content-center">
                 <div class="text-center w-100" >
                     <h1 >HISTORIAL</h1>
                 </div>
-                <div  class="d-flex justify-content-around">
-                    <div class="partidas-historial  col-7">
+                <div  class="d-flex justify-content-around flex-column">
+                    <div class="partidas-historial  col-12">
                         <template class="partidas-template">
-                            <div style="height: 5vh;" class="div-template border border-dark border-3 rounded-3 bg-secondary w-100 d-flex justify-content-center align-items-center fs-5">
+                            <div style="height: 6vh;" class="div-template w-100 d-flex justify-content-center align-items-center">
                                 <p class="m-0" ></p>
                             </div>
                         </template>
                     </div>
     
-                    <div class="col-4">
-                        <div class="info d-flex flex-column">
+                    <div class="col-12 mt-5">
+                        <div class="info d-flex">
                             <template class="estadisticas-template">
-                                <div style="height: auto;" class="info-div d-flex flex-column align-items-center w-100 bg-secondary m-2 rounded-5">
+                                <div style="height: auto;" class="info-div d-flex flex-column align-items-center w-100 ">
                                     <h1 style="height: 2vh;">RECORD DE INTENTOS</h1>
                                     <p style="font-size: 10rem;">5</p>
                                 </div>
@@ -112,6 +114,7 @@
 
     <script src="../js/juego.js" type="module"></script>
     <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js "></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
    
 </body>
 </html>
