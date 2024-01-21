@@ -4,44 +4,35 @@
   font-family: 'digital-clock-font';
   src: url("../../assets/fonts/digital-7.regular.ttf"); }
 
-.bg-color-dark {
-  background-color: #051122 !important;
-  color: white;
+body {
   font-family: "Titillium Web", sans-serif; }
-  .bg-color-dark header {
+  body header {
     padding: 1% 3% 0% 3%; }
-    .bg-color-dark header div {
-      background-color: #19376D;
+    body header div {
       border-radius: 15px; }
-      .bg-color-dark header div h1 {
-        color: white;
+      body header div h1 {
         font-weight: 400; }
-    .bg-color-dark header .boton_modo {
-      background-color: #FFFBF5;
-      color: black;
-      border: 4px solid #C3ACD0; }
-    .bg-color-dark header .header-botonera {
+    body header .header-botonera {
       background-color: transparent; }
-      .bg-color-dark header .header-botonera button {
+      body header .header-botonera button {
+        font-size: 2rem;
         margin-top: 3%;
-        background: #0B2447;
-        color: white;
-        border-color: #A5D7E8;
         border-width: 2px;
         border-radius: 10px;
         box-shadow: 0px 0px 5px -1px black; }
-        .bg-color-dark header .header-botonera button:hover {
-          background: #576CBC; }
-        .bg-color-dark header .header-botonera button:active {
-          box-shadow: 0px 0px 5px -1px black inset; }
-  .bg-color-dark main .pad_numerico {
+      body header .header-botonera:active {
+        box-shadow: 0px 0px 5px -1px black inset; }
+    body header .boton_modo {
+      font-size: 2rem;
+      height: 75%;
+      border-radius: 5%;
+      padding: 0.5%; }
+  body main .pad_numerico {
     box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.62);
     border-radius: 15px;
-    border-color: #A5D7E8 !important;
     border-width: 2px;
-    background-color: #19376D;
     height: auto; }
-    .bg-color-dark main .pad_numerico_display_input input {
+    body main .pad_numerico_display_input input {
       border-radius: 15px;
       box-shadow: 0px 0px 2px -1px black inset;
       background-color: #A5D7E8;
@@ -50,123 +41,149 @@
       font-size: 1.75rem;
       font-weight: 1200;
       font-size: 35pt; }
-  .bg-color-dark main button {
-    background: #0B2447;
-    color: white;
+  body main button {
     border-width: 2px;
     border-radius: 30px;
     box-shadow: 0px 0px 5px -1px black; }
-    .bg-color-dark main button:hover {
-      background: #576CBC; }
-    .bg-color-dark main button:active {
+    body main button:active {
       box-shadow: 0px 0px 5px -1px black inset; }
-  .bg-color-dark main .div-template {
-    border: 3px solid white;
+  body main .historial .historial-div {
+    font-size: 1rem; }
+  body main .div-template {
     border-radius: 10px;
     box-shadow: 0px 0px 5px -1px black; }
-  .bg-color-dark main .partidas {
+  body main .partidas {
     margin: 0% 3% 0% 3%; }
-    .bg-color-dark main .partidas h1 {
-      text-shadow: 1px 1px 15px white; }
-    .bg-color-dark main .partidas .div-template {
-      background-color: #0B2447;
-      color: white;
-      border: 3px solid #A5D7E8;
+    body main .partidas button {
+      font-size: 2rem; }
+    body main .partidas .div-template {
       border-radius: 10px;
       box-shadow: 0px 0px 5px -1px black;
       margin-top: 1%;
       font-size: 1.5rem; }
-    .bg-color-dark main .partidas .info-div {
+    body main .partidas .info-div {
       margin-top: 5%;
-      color: white; }
-      .bg-color-dark main .partidas .info-div h1 {
-        text-shadow: 1px 1px 15px white;
+      color: black; }
+      body main .partidas .info-div h1 {
+        text-shadow: 1px 1px 15px #030303;
         font-size: 2.2rem; }
-      .bg-color-dark main .partidas .info-div p {
-        color: white;
-        text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
+
+@media (max-width: 768px) {
+  body {
+    font-family: "Titillium Web", sans-serif; }
+    body header {
+      padding: 1% 3% 0% 3%; }
+      body header div {
+        border-radius: 15px; }
+        body header div h1 {
+          font-weight: 400; }
+      body header .header-botonera {
+        background-color: transparent;
+        padding: 3%; }
+        body header .header-botonera button {
+          font-size: 2rem; }
+      body header .boton_modo {
+        font-size: 1.5rem;
+        margin-bottom: 2%; }
+    body main .pad_numerico_display_input input {
+      font-size: 25pt; }
+    body main .historial .historial-div {
+      font-size: 0.6rem; }
+    body main .div-template {
+      font-size: 1rem; }
+    body main .partidas .boton {
+      height: auto;
+      padding: 1%; }
+      body main .partidas .boton button {
+        font-size: 1rem; }
+    body main .partidas .div-template {
+      font-size: 1rem; }
+    body main .partidas .info-div h1 {
+      font-size: 1.5rem; }
+    body main .partidas .info-div p {
+      font-size: 4rem; } }
+
+.bg-color-dark {
+  background-color: #051122 !important;
+  color: white; }
+  .bg-color-dark header div {
+    background-color: #19376D; }
+    .bg-color-dark header div h1 {
+      color: white; }
+  .bg-color-dark header .boton_modo {
+    background-color: #FFFBF5;
+    color: black;
+    border: 4px solid #C3ACD0; }
+  .bg-color-dark header .header-botonera button {
+    background: #0B2447;
+    color: white;
+    border-color: #A5D7E8; }
+    .bg-color-dark header .header-botonera button:hover {
+      background: #576CBC; }
+  .bg-color-dark main .pad_numerico {
+    border-color: #A5D7E8 !important;
+    background-color: #19376D; }
+  .bg-color-dark main button {
+    background: #0B2447;
+    color: white; }
+    .bg-color-dark main button:hover {
+      background: #576CBC; }
+  .bg-color-dark main .div-template {
+    border: 3px solid white; }
+  .bg-color-dark main .partidas h1 {
+    text-shadow: 1px 1px 15px white; }
+  .bg-color-dark main .partidas .div-template {
+    background-color: #0B2447;
+    color: white;
+    border: 3px solid #A5D7E8; }
+  .bg-color-dark main .partidas .info-div {
+    color: white; }
+    .bg-color-dark main .partidas .info-div h1 {
+      text-shadow: 1px 1px 15px white; }
+    .bg-color-dark main .partidas .info-div p {
+      color: white;
+      text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
 
 .bg-color-light {
   background-color: #FCF8EC !important;
-  color: black;
-  font-family: "Titillium Web", sans-serif; }
-  .bg-color-light header {
-    padding: 1% 3% 0% 3%; }
-    .bg-color-light header div {
-      background-color: #92C7CF;
-      border-radius: 15px; }
-      .bg-color-light header div h1 {
-        color: black;
-        font-weight: 400; }
-    .bg-color-light header .boton_modo {
-      background-color: #030637;
-      color: white;
-      border: 4px solid #3C0753; }
-    .bg-color-light header .header-botonera {
-      background-color: transparent; }
-      .bg-color-light header .header-botonera button {
-        margin-top: 3%;
-        background: #D0E8F2;
-        color: black;
-        border-color: #79A3B1;
-        border-width: 2px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 5px -1px black; }
-        .bg-color-light header .header-botonera button:hover {
-          background: #AAD7D9; }
-        .bg-color-light header .header-botonera button:active {
-          box-shadow: 0px 0px 5px -1px black inset; }
-  .bg-color-light main .pad_numerico {
-    box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.62);
-    border-radius: 15px;
-    border-color: #79A3B1 !important;
-    border-width: 2px;
-    background-color: #92C7CF;
-    height: auto; }
-    .bg-color-light main .pad_numerico_display_input input {
-      border-radius: 15px;
-      box-shadow: 0px 0px 2px -1px black inset;
-      background-color: #A5D7E8;
-      border-color: black;
-      font-family: "digital-clock-font";
-      font-size: 1.75rem;
-      font-weight: 1200;
-      font-size: 35pt; }
-  .bg-color-light main button {
+  color: black; }
+  .bg-color-light header div {
+    background-color: #92C7CF; }
+    .bg-color-light header div h1 {
+      color: black; }
+  .bg-color-light header .boton_modo {
+    background-color: #030637;
+    color: white;
+    border: 4px solid #3C0753; }
+  .bg-color-light header .header-botonera button {
     background: #D0E8F2;
     color: black;
-    border-width: 2px;
-    border-radius: 30px;
-    box-shadow: 0px 0px 5px -1px black; }
+    border-color: #79A3B1; }
+    .bg-color-light header .header-botonera button:hover {
+      background: #AAD7D9; }
+  .bg-color-light main .pad_numerico {
+    border-color: #79A3B1 !important;
+    background-color: #92C7CF; }
+  .bg-color-light main button {
+    background: #D0E8F2;
+    color: black; }
     .bg-color-light main button:hover {
       background: #AAD7D9; }
-    .bg-color-light main button:active {
-      box-shadow: 0px 0px 5px -1px black inset; }
   .bg-color-light main .div-template {
-    border: 3px solid black;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px -1px black; }
-  .bg-color-light main .partidas {
-    margin: 0% 3% 0% 3%; }
-    .bg-color-light main .partidas h1 {
-      text-shadow: 1px 1px 15px black; }
-    .bg-color-light main .partidas .div-template {
-      background-color: #D0E8F2;
+    border: 3px solid black; }
+  .bg-color-light main .partidas h1 {
+    text-shadow: 1px 1px 15px black; }
+  .bg-color-light main .partidas .div-template {
+    background-color: #D0E8F2;
+    color: black;
+    border: 3px solid #79A3B1; }
+  .bg-color-light main .partidas .info-div {
+    color: black; }
+    .bg-color-light main .partidas .info-div h1 {
+      text-shadow: 1px 1px 15px #030303; }
+    .bg-color-light main .partidas .info-div p {
       color: black;
-      border: 3px solid #79A3B1;
-      border-radius: 10px;
-      box-shadow: 0px 0px 5px -1px black;
-      margin-top: 1%;
-      font-size: 1.5rem; }
-    .bg-color-light main .partidas .info-div {
-      margin-top: 5%;
-      color: black; }
-      .bg-color-light main .partidas .info-div h1 {
-        text-shadow: 1px 1px 15px #030303;
-        font-size: 2.2rem; }
-      .bg-color-light main .partidas .info-div p {
-        color: black;
-        text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
+      text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
 
 * {
   margin: 0;
@@ -195,6 +212,105 @@
     .body_main section a {
       font-weight: 700;
       font-size: 3rem; }
+
+body {
+  font-family: "Titillium Web", sans-serif; }
+  body header {
+    padding: 1% 3% 0% 3%; }
+    body header div {
+      border-radius: 15px; }
+      body header div h1 {
+        font-weight: 400; }
+    body header .header-botonera {
+      background-color: transparent; }
+      body header .header-botonera button {
+        font-size: 2rem;
+        margin-top: 3%;
+        border-width: 2px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px -1px black; }
+      body header .header-botonera:active {
+        box-shadow: 0px 0px 5px -1px black inset; }
+    body header .boton_modo {
+      font-size: 2rem;
+      height: 75%;
+      border-radius: 5%;
+      padding: 0.5%; }
+  body main .pad_numerico {
+    box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.62);
+    border-radius: 15px;
+    border-width: 2px;
+    height: auto; }
+    body main .pad_numerico_display_input input {
+      border-radius: 15px;
+      box-shadow: 0px 0px 2px -1px black inset;
+      background-color: #A5D7E8;
+      border-color: black;
+      font-family: "digital-clock-font";
+      font-size: 1.75rem;
+      font-weight: 1200;
+      font-size: 35pt; }
+  body main button {
+    border-width: 2px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px -1px black; }
+    body main button:active {
+      box-shadow: 0px 0px 5px -1px black inset; }
+  body main .historial .historial-div {
+    font-size: 1rem; }
+  body main .div-template {
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px -1px black; }
+  body main .partidas {
+    margin: 0% 3% 0% 3%; }
+    body main .partidas button {
+      font-size: 2rem; }
+    body main .partidas .div-template {
+      border-radius: 10px;
+      box-shadow: 0px 0px 5px -1px black;
+      margin-top: 1%;
+      font-size: 1.5rem; }
+    body main .partidas .info-div {
+      margin-top: 5%;
+      color: black; }
+      body main .partidas .info-div h1 {
+        text-shadow: 1px 1px 15px #030303;
+        font-size: 2.2rem; }
+
+@media (max-width: 768px) {
+  body {
+    font-family: "Titillium Web", sans-serif; }
+    body header {
+      padding: 1% 3% 0% 3%; }
+      body header div {
+        border-radius: 15px; }
+        body header div h1 {
+          font-weight: 400; }
+      body header .header-botonera {
+        background-color: transparent;
+        padding: 3%; }
+        body header .header-botonera button {
+          font-size: 2rem; }
+      body header .boton_modo {
+        font-size: 1.5rem;
+        margin-bottom: 2%; }
+    body main .pad_numerico_display_input input {
+      font-size: 25pt; }
+    body main .historial .historial-div {
+      font-size: 0.6rem; }
+    body main .div-template {
+      font-size: 1rem; }
+    body main .partidas .boton {
+      height: auto;
+      padding: 1%; }
+      body main .partidas .boton button {
+        font-size: 1rem; }
+    body main .partidas .div-template {
+      font-size: 1rem; }
+    body main .partidas .info-div h1 {
+      font-size: 1.5rem; }
+    body main .partidas .info-div p {
+      font-size: 4rem; } }
 
 body {
   height: auto;

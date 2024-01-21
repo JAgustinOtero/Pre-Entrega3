@@ -2,15 +2,12 @@
 {
     background-color: $bg-color-light!important;
     color: black;
-    font-family: $general-font;
+    
     header{
-        padding: 1% 3% 0% 3%;
         div{
             background-color: $bg-color-light-divs;
-            border-radius: 15px;
             h1{
                 color: black;
-                font-weight: 400;
             }
         }
         .boton_modo{
@@ -19,22 +16,14 @@
             border: 4px solid #3C0753;
         }
         .header-botonera{
-            background-color: transparent;
             button{
-                margin-top: 3%;
+                
                 background: $bg-color-light-buttons;
                 color: black;
                 border-color: $bg-color-light-buttons-border;
-                border-width: 2px;
-                border-radius: 10px;
-                box-shadow: 0px 0px 5px -1px black;
                 &:hover
                 {
                     background: $bg-color-light-buttons-hover;
-                }
-                &:active
-                {
-                    box-shadow: 0px 0px 5px -1px black inset;
                 }
             }
         }
@@ -43,52 +32,23 @@
     {
         .pad_numerico
         {
-            box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.62);
-            border-radius: 15px;
             border-color: $bg-color-light-buttons-border!important;
-            border-width: 2px;
             background-color: $bg-color-light-divs;
-            height: auto;
-            &_display{
-                &_input{
-                    input{
-                        border-radius: 15px;
-                        box-shadow: 0px 0px 2px -1px black inset;
-                        background-color: #A5D7E8; 
-                        border-color: black;
-                        font-family: $input-font;
-                        font-size: 1.75rem;
-                        font-weight: 1200;
-                        font-size: 35pt;
-                    }
-                }
-
-            }
         }
         button{
             background: $bg-color-light-buttons;
             color: black;
-            border-width: 2px;
-            border-radius: 30px;
-            box-shadow: 0px 0px 5px -1px black;
             &:hover
             {
                 background: $bg-color-light-buttons-hover;
-            }
-            &:active
-            {
-                box-shadow: 0px 0px 5px -1px black inset;
             }
         }
         .div-template
         {
             border: 3px solid black;
-            border-radius: 10px;
-            box-shadow: 0px 0px 5px -1px black;
         }
         .partidas
         {
-            margin: 0% 3% 0% 3%;
             h1{
                 text-shadow: 1px 1px 15px black;
             }
@@ -97,18 +57,12 @@
                 background-color: $bg-color-light-buttons;
                 color: black;
                 border: 3px solid $bg-color-light-buttons-border;
-                border-radius: 10px;
-                box-shadow: 0px 0px 5px -1px black;
-                margin-top: 1%;
-                font-size: 1.5rem;
             }
             .info-div
             {
-                margin-top: 5%;
                 color: black;
                 h1{
                     text-shadow: 1px 1px 15px rgb(3, 3, 3);
-                    font-size: 2.2rem;
                 }
                 p{
                     color: black;

@@ -600,7 +600,7 @@ function resetIntento()
   if(cant_intentos > 1)
   {
     div_historial = historial.querySelector(".historial-div").querySelectorAll("div")
-    div_historial[1].style.fontSize = "1rem"
+    div_historial[1].style.fontSize = "inherit"
     div_historial[1].style.height = "5vh"
     div_historial[1].style.width = "90%"
   }
