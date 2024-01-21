@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@300&display=swap");
 @font-face {
   font-family: 'digital-clock-font';
   src: url("../../assets/fonts/digital-7.regular.ttf"); }
@@ -73,7 +71,7 @@
     .bg-color-dark main .partidas .div-template {
       background-color: #0B2447;
       color: white;
-      border: 3px solid white;
+      border: 3px solid #A5D7E8;
       border-radius: 10px;
       box-shadow: 0px 0px 5px -1px black;
       margin-top: 1%;
@@ -155,7 +153,7 @@
     .bg-color-light main .partidas .div-template {
       background-color: #D0E8F2;
       color: black;
-      border: 3px solid black;
+      border: 3px solid #79A3B1;
       border-radius: 10px;
       box-shadow: 0px 0px 5px -1px black;
       margin-top: 1%;
@@ -170,16 +168,40 @@
         color: black;
         text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
 
-@font-face {
-  font-family: 'digital-clock-font';
-  src: url("../../assets/fonts/digital-7.regular.ttf"); }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.body_main {
+  height: 100vh; }
+  .body_main header {
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem; }
+  .body_main section {
+    display: flex;
+    height: 50vh;
+    justify-content: center;
+    font-size: 1.5rem; }
+    .body_main section div {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center; }
+    .body_main section a {
+      font-weight: 700;
+      font-size: 3rem; }
 
 body {
   height: auto;
   width: 100%; }
 
 header {
-  height: 25vh; }
+  height: auto; }
 
 .h-20 {
   height: 17%; }
@@ -190,6 +212,6 @@ main {
     height: 60vh;
     padding: 5vh; }
   main .div-template {
-    /*font-size: 1.5rem;*/
+    font-size: 1.5rem;
     height: 10vh;
     width: 100%; }
