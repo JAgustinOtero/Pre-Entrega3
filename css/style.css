@@ -193,7 +193,7 @@ body {
 
 .body_main {
   height: 95vh;
-  background: url('../assets/images/BackgroundNumbers.webp');
+  background: url(../assets/images/BackgroundNumbers.webp);
   background-position: center;
   background-size: cover;
   color: black;
@@ -212,7 +212,8 @@ body {
       background-color: rgba(0, 0, 0, 0.6);
       width: 80%;
       padding: 2.6%;
-      text-shadow: 1px 1px 10px white;
+      text-shadow: 1px 1px 10px cyan;
+      color: bisque;
       font-weight: 600;
       font-size: 2rem;
       height: fit-content;
