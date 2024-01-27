@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@300&display=swap");
 @font-face {
   font-family: 'digital-clock-font';
-  src: url("assets/fonts/digital-7.regular.ttf"); }
+  src: url("../assets/fonts/digital-7.regular.ttf"); }
 
 body {
   font-family: "Titillium Web", sans-serif; }
@@ -193,7 +193,7 @@ body {
 
 .body_main {
   height: 95vh;
-  background: url(assets/images/BackgroundNumbers.webp);
+  background: url(../assets/images/BackgroundNumbers.webp);
   background-position: center;
   background-size: cover;
   color: black;
