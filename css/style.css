@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@300&display=swap");
 @font-face {
@@ -191,27 +192,84 @@ body {
   box-sizing: border-box; }
 
 .body_main {
-  height: 100vh; }
-  .body_main header {
-    height: 25vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem; }
-  .body_main section {
+  height: 95vh;
+  background: url(../../assets/images/BackgroundNumbers.webp);
+  background-position: center;
+  background-size: cover;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .body_main main {
     display: flex;
     height: 50vh;
     justify-content: center;
     font-size: 1.5rem; }
-    .body_main section div {
-      width: 90%;
+    .body_main main section {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      align-items: center; }
-    .body_main section a {
-      font-weight: 700;
-      font-size: 3rem; }
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 80%;
+      padding: 2.6%;
+      text-shadow: 1px 1px 10px white;
+      font-weight: 600;
+      font-size: 2rem;
+      height: fit-content;
+      text-align: center; }
+      .body_main main section ☺
+h1 {
+        font-size: 4rem; }
+      .body_main main section p {
+        margin: 2%; }
+      .body_main main section a {
+        font-weight: 900;
+        font-size: 3rem;
+        text-decoration: none;
+        color: black;
+        background-color: aqua;
+        padding: 1% 3%;
+        border-radius: 5rem;
+        margin-top: 1%;
+        transition: 0.5s; }
+        .body_main main section a:hover {
+          background-color: blue;
+          transition: 0.5s;
+          transform: scale(1.2);
+          text-shadow: none;
+          color: white; }
+
+@media (max-width: 1440px) {
+  .body_main {
+    height: 75vh;
+    background-repeat: no-repeat;
+    background-size: auto; } }
+
+@media (max-width: 1024px) {
+  .body_main {
+    background-size: auto; }
+    .body_main main section h1 {
+      font-size: 2.5rem; }
+    .body_main main section h2 {
+      font-size: 2.25rem; }
+    .body_main main section p {
+      font-size: 1.75rem; } }
+
+@media (max-width: 768px) {
+  .body_main main section h1 {
+    font-size: 2rem; }
+  .body_main main section h2 {
+    font-size: 1.75rem; }
+  .body_main main section p {
+    font-size: 1.2rem; } }
+
+@media (max-width: 320px) {
+  .body_main main section h1 {
+    font-size: 1.7rem; }
+  .body_main main section h2 {
+    font-size: 1.5rem; }
+  .body_main main section p {
+    font-size: 1rem; } }
 
 body {
   font-family: "Titillium Web", sans-serif; }
